@@ -50,7 +50,7 @@ function displayTrackers() {
 
     removeAllChildNodes(tracker_table)
 
-    let table_head = 
+    let table_head =
         `
         <tr>
         <th scope="col" class="px-6 py-3">
@@ -68,8 +68,8 @@ function displayTrackers() {
         </tr>
         `
 
-    if (trackers.length > 0){
-    tracker_table_head.innerHTML = table_head
+    if (trackers.length > 0) {
+        tracker_table_head.innerHTML = table_head
     } else {
         tracker_table_head.innerHTML = '<p>You currently have no trackers</p>'
     }
@@ -78,10 +78,10 @@ function displayTrackers() {
     for (const t of trackers) {
         let tracker = `
             <th scope="row"
-                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                 ${t.campground_name}
             </th>
-            <td class="px-6 py-4">
+            <td class="px-6 py-4 ">
                 ${t.start_date}
             </td>
             <td class="px-6 py-4">
@@ -100,6 +100,7 @@ function displayTrackers() {
         `
         let tr = document.createElement('tr')
         tr.classList.add("bg-white")
+       
         tr.innerHTML = tracker
         tracker_table.appendChild(tr)
     }
@@ -111,7 +112,7 @@ function removeAllChildNodes(parent) {
     }
 }
 
-async function removeTracker(device_token, campground_id, campground_name, start_date, end_date){
+async function removeTracker(device_token, campground_id, campground_name, start_date, end_date) {
     console.log("tracker being removed")
     let request = await fetch('https://tt7sxvlds5.execute-api.us-west-2.amazonaws.com/dev/remove_tracker', {
         method: 'POST',
