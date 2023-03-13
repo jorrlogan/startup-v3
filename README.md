@@ -10,8 +10,9 @@ Millions of Americans plan camping vacations across the United States each year.
 * Set up a tracker to enable notifications for a certain campground
 * View and edit list of enabled trackers for campgrounds.
 
-![image info](./DesignImages/Intro.png)
-![image info](./DesignImages/Procedure.png)
+![image info](./design/Search.png)
+![image info](./design/Campground.png)
+![image info](./design/Trackers.png)
 
 ## Web Programming Notes
 ### Table element
