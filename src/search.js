@@ -16,6 +16,7 @@ window.addEventListener('load', async function (event) {
         parseCampgrounds(json)
         console.log(json)
         loaded = true
+        this.document.getElementById('search-loader').innerHTML = ""
     }
 })
 
