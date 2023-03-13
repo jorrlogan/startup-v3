@@ -19,23 +19,6 @@ window.addEventListener('load', async function (event) {
     }
 })
 
-async function addTracker(campground_id, device_token, campground_name, start_date, end_date) {
-    let request = await fetch('https://tt7sxvlds5.execute-api.us-west-2.amazonaws.com/dev/track', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            'campground_id': `${campground_id}`,
-            'device_token': `${device_token}`,
-            'campground_name': `${campground_name}`,
-            'start_date': `${start_date}`,
-            'end_date': `${end_date}`
-        })
-    })
-}
-
 function parseCampgrounds(json_campgrounds) {
     for (const json_campround of json_campgrounds.campgroundList) {
         campgrounds.push(new Campground(json_campround.campgroundId, json_campround.campsiteName))

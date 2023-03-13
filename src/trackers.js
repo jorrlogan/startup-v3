@@ -1,6 +1,7 @@
 let trackers = []
 
 async function getTrackers() {
+
     console.log("getting trackers")
     let device_token = document.getElementById('email').value
     console.log(device_token)
@@ -16,10 +17,10 @@ async function getTrackers() {
     })
 
     let json = await request.json()
-    parseTrackers(json)
+    parseTrackers(json, device_token)
 }
 
-function parseTrackers(json) {
+function parseTrackers(json, device_token) {
     let json_trackers = json.trackers
 
     for (const t of json_trackers) {
@@ -27,18 +28,19 @@ function parseTrackers(json) {
         console.log(t.campground_name)
         console.log(t.start_date)
         console.log(t.end_date)
-        trackers.push(new Tracker(t.campground_id, t.campground_name, t.start_date, t.end_date))
+        trackers.push(new Tracker(t.campground_id, t.campground_name, t.start_date, t.end_date, device_token))
     }
     console.log(trackers.length)
     displayTrackers()
 }
 
 class Tracker {
-    constructor(campground_id, campground_name, start_date, end_date) {
+    constructor(campground_id, campground_name, start_date, end_date, device_token) {
         this.campground_id = campground_id
         this.campground_name = campground_name
         this.start_date = start_date
         this.end_date = end_date
+        this.device_token = device_token
     }
 }
 
@@ -66,12 +68,15 @@ function displayTrackers() {
         </tr>
         `
 
+    if (trackers.length > 0){
     tracker_table_head.innerHTML = table_head
+    } else {
+        tracker_table_head.innerHTML = '<p>You currently have no trackers</p>'
+    }
 
 
     for (const t of trackers) {
         let tracker = `
-            <tr class="bg-white dark:bg-gray-800">
             <th scope="row"
                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 ${t.campground_name}
@@ -84,7 +89,7 @@ function displayTrackers() {
             </td>
             <td class="px-6 py-4 text-right">
             <a href="#"
-                class="font-medium text-blue-600 dark:text-blue-500 hover:underline"><svg
+                class="font-medium text-blue-600 dark:text-blue-500 hover:underline" onclick="removeTracker('${t.device_token}', '${t.campground_id}', '${t.campground_name}', '${t.start_date}', '${t.end_date}')"><svg
                     fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -92,9 +97,11 @@ function displayTrackers() {
                     </path>
                 </svg></a>
         </td>
-            </tr>
         `
-        tracker_table.innerHTML = tracker
+        let tr = document.createElement('tr')
+        tr.classList.add("bg-white")
+        tr.innerHTML = tracker
+        tracker_table.appendChild(tr)
     }
 }
 
@@ -102,4 +109,26 @@ function removeAllChildNodes(parent) {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
     }
+}
+
+async function removeTracker(device_token, campground_id, campground_name, start_date, end_date){
+    console.log("tracker being removed")
+    let request = await fetch('https://tt7sxvlds5.execute-api.us-west-2.amazonaws.com/dev/remove_tracker', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            'campground_id': `${campground_id}`,
+            'device_token': `${device_token}`,
+            'campground_name': `${campground_name}`,
+            'start_date': `${start_date}`,
+            'end_date': `${end_date}`
+        })
+    })
+
+    let json = await request.json()
+    getTrackers()
+    console.log(json)
 }

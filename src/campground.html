@@ -9,7 +9,7 @@
 </head>
 
 <body class="w-screen h-screen">
-    <div class="w-screen h-screen bg-cover" style="background-image: url('./horseshoe.png')">
+    <div class="w-screen h-screen bg-cover bg-black" style="background-image: url('./horseshoe.png')">
 
         <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
             <div class="container flex flex-wrap items-center justify-between mx-auto">
@@ -58,7 +58,7 @@
 
                             </div>
                             <div>
-
+                                <form>
                                 <div date-rangepicker class="flex justify-center p-8 items-center">
                                     <div class="relative">
                                         <div
@@ -71,7 +71,7 @@
                                                     clip-rule="evenodd"></path>
                                             </svg>
                                         </div>
-                                        <input name="start" type="text"
+                                        <input id="start-date" name="start" type="text"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             placeholder="Select date start">
                                     </div>
@@ -87,14 +87,17 @@
                                                     clip-rule="evenodd"></path>
                                             </svg>
                                         </div>
-                                        <input name="end" type="text"
+                                        <input id="end-date" name="end" type="text"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             placeholder="Select date end">
                                     </div>
+                                    <input type="email" id="email"
+                                        class="bg-gray-50 basis-3/12 m-4 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="john.doe@company.com" required>
                                     <button type="button"
-                                        class="px-5 py-2  ml-4 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Track</button>
+                                        class="px-5 py-2  text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onclick="trackCampground()">Track</button>
                                 </div>
-
+                                </form>
                             </div>
                             <div class="overflow-y-auto h-auto max-h-96">
                                 <div id="campground-description">
