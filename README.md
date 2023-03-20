@@ -70,6 +70,7 @@ Then, because VS Code does not know how to launch nodemon automatically, you nee
 
 Now when you press F5 to start debugging it will run Nodemon instead of Node.js and your changes will automatically update your application when you save.
 
+### Setting up express app
 Move all the previous deliverable code files (_.html, _.js, *.css, favicon.ico, and asserts) into a sub-directory named public. We will use the HTTP Node.js based service to host the front-end application files. This is done with the static file middleware that we will add our service index.js.
 
 app.use(express.static('public'));
