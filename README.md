@@ -137,3 +137,142 @@ Converting Simon to a service involved the following steps.
 
      // Modify the DOM to display the scores
    ```
+
+### Mongo DB
+#### Collection
+A collection is basically an array that stores documents
+```js
+[
+  {
+    _id: '62300f5316f7f58839c811de',
+    name: 'Lovely Loft',
+    summary: 'A charming loft in Paris',
+    beds: 1,
+    last_review: {
+      $date: '2022-03-15T04:06:17.766Z',
+    },
+    price: 3000,
+  },
+  {
+    _id: '623010b97f1fed0a2df311f8',
+    name: 'Infinite Views',
+    summary: 'Modern home with infinite views from the infinity pool',
+    property_type: 'House',
+    beds: 5,
+    price: 250,
+  },
+];
+```
+#### Common Operations
+```js
+// find all houses
+db.house.find();
+
+// find houses with two or more bedrooms
+db.house.find({ beds: { $gte: 2 } });
+
+// find houses that are available with less than three beds
+db.house.find({ status: 'available', beds: { $lt: 3 } });
+
+// find houses with either less than three beds or less than $1000 a night
+db.house.find({ $or: [(beds: { $lt: 3 }), (price: { $lt: 1000 })] });
+
+// find houses with the text 'modern' or 'beach' in the summary
+db.house.find({ summary: /(modern|beach)/i });
+```
+### Using MongoDB in your application
+
+📖 **Deeper dive reading**: [MongoDB tutorial](https://www.mongodb.com/developer/languages/javascript/node-crud-tutorial/)
+
+The first step to using Mongo in your application is to install the `mongodb` package using NPM.
+
+```sh
+➜ npm install mongodb
+```
+
+With that done you then use the `MongoClient` object to make a client connection to the database server. This requires a username, password, and the hostname of the database server.
+
+```js
+const { MongoClient } = require('mongodb');
+
+const userName = 'holowaychuk';
+const password = 'express';
+const hostname = 'mongodb.com';
+
+const uri = `mongodb+srv://${userName}:${password}@${hostname}`;
+
+const client = new MongoClient(uri);
+```
+
+With the client connection you can then get a database object and from that a collection object. The collection object allows you to insert, and query for, documents. You do not have to do anything special to insert a JavaScript object as a Mongo document. You just call the `insertOne` function on the collection object and pass it the JavaScript object. When you insert a document, if the database or collection does not exists, Mongo will automatically create them for you. When the document is inserted into the collection it will automatically be assigned a unique ID.
+
+```js
+const collection = client.db('rental').collection('house');
+
+const house = {
+  name: 'Beachfront views',
+  summary: 'From your bedroom to the beach, no shoes required',
+  property_type: 'Condo',
+  beds: 1,
+};
+await collection.insertOne(house);
+```
+
+To query for documents you use the `find` function on the collection object. Note that the find function is asynchronous and so we use the `await` keyword to wait for the promise to resolve before we write them out to the console.
+
+```js
+const cursor = collection.find();
+const rentals = await cursor.toArray();
+rentals.forEach((i) => console.log(i));
+```
+
+If you do not supply any parameters to the `find` function then it will return all documents in the collection. In this case we only get back the single document that we previously inserted. Notice that the automatically generated ID is returned with the document.
+
+**Output**
+
+```js
+[
+  {
+    _id: new ObjectId('639a96398f8de594e198fc13'),
+    name: 'Beachfront views',
+    summary: 'From your bedroom to the beach, no shoes required',
+    property_type: 'Condo',
+    beds: 1,
+  },
+];
+```
+
+You can provide a query and options to the `find` function. In the example below we query for a `property_type` of Condo that has less than two bedrooms. We also specify the options to sort by descending price, and limit our results to the first 10 documents.
+
+```js
+const query = { property_type: 'Condo', beds: { $lt: 2 } };
+
+const options = {
+  sort: { price: -1 },
+  limit: 10,
+};
+
+const cursor = collection.find(query, options);
+const rentals = await cursor.toArray();
+rentals.forEach((i) => console.log(i));
+```
+
+The query matches the document that we previously inserted and so we get the same result as before.
+
+There is a lot more functionality that MongoDB provides, but this is enough to get you started. If you are interested you can explore the tutorials on their [website](https://www.mongodb.com/docs/).
+
+## Keeping your keys out of your code
+
+You need to protect your credentials for connecting to your Mongo database. One common mistake is to check them into your code and then post it to a public GitHub repository. Instead you can load your credentials when the application executes. One common way to do that, is to read them from environment variables. The JavaScript `process.env` object provides access to the environment.
+
+```Javascript
+const userName = process.env.MONGOUSER;
+const password = process.env.MONGOPASSWORD;
+const hostname = process.env.MONGOHOSTNAME;
+
+if (!userName) {
+  throw Error("Database not configured. Set environment variables");
+}
+```
+
+Following this pattern requires you to set these variables in your development and production environments before you can successfully execute.
