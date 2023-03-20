@@ -56,3 +56,16 @@ window.location.href = "url" lets you jump pages in the javascript file
 document.querySelectorAll allows you to grab all items with a class name
 document.querySelectore('.classname') allow you to grab a class name
 audio files can be played with the Audio constructor and the play property
+
+### JS Debug
+Nodemon
+Once you start writing complex web applications you will find yourself making changes in the middle of debugging sessions and you would like have node restart automatically and update the browser as the changes are saved. This seems like a simple thing, but over the course of hundreds of changes, every second you can save really starts to add up.
+
+The Nodemon package is basically a wrapper around node that watches for files in the project directory to change. When it detects that you saved something it will automatically restart node.
+
+If you would like to experiment with this then take the following steps. First install Nodemon globally so that you can use it to debug all of your projects.
+
+npm install -g nodemon
+Then, because VS Code does not know how to launch nodemon automatically, you need create a VS Code launch configuration. In VS Code press CTRL-SHIFT-P (on Windows) or ⌘-⇧-P (on Mac) and type the command Debug: Add configuration. This will then ask you what type of configuration you would like to create. Type Node.js and select the Node.js: Nodemon setup option. in the launch configuration file at it creates, change the program from app.js to main.js (or whatever the main JavaScript file is for your application) and save the configuration file.
+
+Now when you press F5 to start debugging it will run Nodemon instead of Node.js and your changes will automatically update your application when you save.
