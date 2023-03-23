@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "datepicker.js": "^0.0.1-beta1",
+    "express": "^4.18.2",
     "flowbite": "^1.6.4"
   }
 }
