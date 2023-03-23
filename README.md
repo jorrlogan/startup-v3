@@ -375,3 +375,41 @@ sameSite will only return the cookie to the domain that generated it.
 To hash our passwords we will use the bcrypt package. This creates a very secure one way hash of the password. If you are interested in understanding how bcrypt works, it is definitely worth the time.
 
 To generate a reasonable authentication token we use the uuid package. UUID stands for Universally Unique Identifier, and it does a really good job creating a hard to guess, random, unique ID.
+
+## Creating a WebSocket conversation
+
+JavaScript running on a browser can initiate a websocket connection with the browser's WebSocket API. First you create a WebSocket object by specifying the port you want to communicate on.
+
+You can then send messages with the `send` function, and register a callback using the `onmessage` function to receive messages.
+
+```js
+const socket = new WebSocket('ws://localhost:9900');
+
+socket.onmessage = (event) => {
+  console.log('received: ', event.data);
+};
+
+socket.send('I am listening');
+```
+
+The server uses the `ws` package to create a WebSocketServer that is listening on the same port the browser is using. By specifying a port when you create the WebSocketServer you are telling the server to listen for HTTP connections on that port and to automatically upgrade them to a WebSocket connection if the request has a `connection: Upgrade` header.
+
+When a connection is detected it calls the server's `on connection` callback. The server can then send messages with the `send` function, and register a callback using the `on message` function to receive messages.
+
+```js
+const { WebSocketServer } = require('ws');
+
+const wss = new WebSocketServer({ port: 9900 });
+
+wss.on('connection', (ws) => {
+  ws.on('message', (data) => {
+    const msg = String.fromCharCode(...data);
+    console.log('received: %s', msg);
+
+    ws.send(`I heard you say "${msg}"`);
+  });
+
+  ws.send('Hello webSocket');
+});
+```
+
