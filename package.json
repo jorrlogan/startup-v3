@@ -12,6 +12,7 @@
     "tailwindcss": "^3.2.7"
   },
   "dependencies": {
+    "aws-sdk": "^2.1342.0",
     "bcrypt": "^5.1.0",
     "cookie-parser": "^1.4.6",
     "datepicker.js": "^0.0.1-beta1",

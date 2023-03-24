@@ -3,21 +3,21 @@ let selected_campground = null
 let loaded = false
 
 window.addEventListener('load', async function (event) {
-    // if (!loaded) {
-    //     let request = await fetch('https://tt7sxvlds5.execute-api.us-west-2.amazonaws.com/dev/search', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Accept': 'application/json',
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify({ 'search': 'all' })
-    //     })
-    //     let json = await request.json()
-    //     parseCampgrounds(json)
-    //     console.log(json)
-    //     loaded = true
-    //     this.document.getElementById('search-loader').innerHTML = ""
-    // }
+    if (!loaded) {
+        let request = await fetch('/api/campgrounds', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            // body: JSON.stringify({ 'search': 'all' })
+        })
+        let json = await request.json()
+        parseCampgrounds(json)
+        console.log(json)
+        loaded = true
+        this.document.getElementById('search-loader').innerHTML = ""
+    }
 })
 
 function parseCampgrounds(json_campgrounds) {

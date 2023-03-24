@@ -9,6 +9,7 @@ const bcrypt = require('bcrypt');
  * Dependencies
  */
 const DB = require('./database.js');
+const campsnatch = require('./campsnatch.js');
 
 /**
  * Auth cookie
@@ -99,6 +100,15 @@ function setAuthCookie(res, authToken) {
         sameSite: 'strict',
     });
 }
+
+
+secureApiRouter.get('/campgrounds', async (req, res) => {
+    let json = await campsnatch.getCampgrounds()
+    res.setHeader('Cache-Control', 'max-age=3600');
+    res.send(json)
+})
+
+
 
 /**
  * Default error handler

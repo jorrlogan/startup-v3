@@ -1048,6 +1048,10 @@ input:checked + .toggle-bg {
   position: relative;
 }
 
+.\!relative {
+  position: relative !important;
+}
+
 .sticky {
   position: sticky;
 }
