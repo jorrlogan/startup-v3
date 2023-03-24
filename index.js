@@ -108,6 +108,42 @@ secureApiRouter.get('/campgrounds', async (req, res) => {
     res.send(json)
 })
 
+secureApiRouter.post('/trackers', async (req, res) => {
+    console.log('getting trackers')
+    const device_token = req.body.device_token
+    let json = await campsnatch.getTrackers(device_token)
+    res.send(json)
+})
+
+secureApiRouter.post('/add_tracker', async (req, res) => {
+    try {
+        console.log('added tracker')
+        const campground_id = req.body.campground_id
+        const device_token = req.body.device_token
+        const campground_name = req.body.campground_name
+        const start_date = req.body.start_date
+        const end_date  = req.body.end_date
+        let json = await campsnatch.addTracker(campground_id, device_token, campground_name, start_date, end_date)
+        res.send(json)
+    } catch(error) {
+        // res.status(401).send({ msg: 'Unauthorized' });
+    }
+})
+
+secureApiRouter.post('/remove_tracker', async (req, res) => {
+    try {
+        console.log('removing tracker')
+        const campground_id = req.body.campground_id
+        const device_token = req.body.device_token
+        const campground_name = req.body.campground_name
+        const start_date = req.body.start_date
+        const end_date  = req.body.end_date
+        let json = await campsnatch.removeTracker(campground_id, device_token, campground_name, start_date, end_date)
+        res.send(json)
+    } catch(error) {
+        // res.status(401).send({ msg: 'Unauthorized' });
+    }
+})
 
 
 /**
@@ -124,7 +160,7 @@ app.use((_req, res) => {
     res.sendFile('index.html', { root: 'public' });
 });
 
+
 app.listen(8080, () => {
     console.log(`Listening on port 8080`)
 })
-

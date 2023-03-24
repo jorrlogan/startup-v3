@@ -5,7 +5,7 @@ async function getTrackers() {
     console.log("getting trackers")
     let device_token = document.getElementById('email').value
     console.log(device_token)
-    let request = await fetch('https://tt7sxvlds5.execute-api.us-west-2.amazonaws.com/dev/gettrackers', {
+    let request = await fetch('/api/trackers', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -148,7 +148,7 @@ async function removeTracker(device_token, campground_id, campground_name, start
     removeAllChildNodes(tracker_table_head)
     removeAllChildNodes(tracker_table)
 
-    let request = await fetch('https://tt7sxvlds5.execute-api.us-west-2.amazonaws.com/dev/remove_tracker', {
+    let request = await fetch('/api/remove_tracker', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',

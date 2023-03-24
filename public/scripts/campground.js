@@ -52,7 +52,7 @@ async function trackCampground(){
 }
 
 async function addTracker(campground_id, device_token, campground_name, start_date, end_date) {
-    let request = await fetch('https://tt7sxvlds5.execute-api.us-west-2.amazonaws.com/dev/track', {
+    let request = await fetch('/api/add_tracker', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -67,7 +67,6 @@ async function addTracker(campground_id, device_token, campground_name, start_da
         })
     })
     confirmTrackerSet()
-
 }
 
 function confirmTrackerSet(){
