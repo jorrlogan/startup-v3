@@ -7,6 +7,7 @@ window.addEventListener('load', async function (event) {
 
     let details = await getCampgroundDetails(campground_id)
     displayCampgroundDetails(details)
+    getCampgroundImages(campground_id)
 })
 
 async function getCampgroundDetails(campground_id){
@@ -33,6 +34,27 @@ function displayCampgroundDetails(details){
     description.innerHTML = details.facilityDescription
 
     document.getElementById('campground-loader').innerHTML = ""
+}
+
+async function getCampgroundImages(campground_id){
+    let response = await fetch('/api/campground/images', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            'campground_id': `${campground_id}`,
+        })
+    })
+
+    let json = await response.json()
+    let images = json.images
+
+    let imagesElement = document.querySelector("#images")
+    var image = document.createElement("img")
+    image.src = images[0]
+    imagesElement.appendChild(image)
 }
 
 async function trackCampground(){

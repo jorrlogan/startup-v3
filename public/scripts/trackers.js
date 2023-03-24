@@ -2,6 +2,7 @@ let trackers = []
 
 async function getTrackers() {
     startSpinner()
+
     console.log("getting trackers")
     let device_token = document.getElementById('email').value
     console.log(device_token)

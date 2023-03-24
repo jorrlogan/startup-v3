@@ -108,6 +108,11 @@ secureApiRouter.get('/campgrounds', async (req, res) => {
     res.send(json)
 })
 
+secureApiRouter.post('/campground/images', async (req, res) => {
+    let images = await campsnatch.getCampgroundImages(req.body.campground_id)
+    res.send({ images: images })
+})
+
 secureApiRouter.post('/trackers', async (req, res) => {
     console.log('getting trackers')
     const device_token = req.body.device_token
