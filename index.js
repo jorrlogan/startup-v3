@@ -169,3 +169,8 @@ app.use((_req, res) => {
 app.listen(8080, () => {
     console.log(`Listening on port 8080`)
 })
+
+
+/* TODO: Web Socket:
+- Send out notifications when someone gets a notification about a campground opening, or maybe have it open for popular ones
+*/

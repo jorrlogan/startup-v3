@@ -52,9 +52,16 @@ async function getCampgroundImages(campground_id){
     let images = json.images
 
     let imagesElement = document.querySelector("#images")
-    var image = document.createElement("img")
-    image.src = images[0]
-    imagesElement.appendChild(image)
+
+    for(const image of images){
+        var imageElement = document.createElement("img")
+        imageElement.src = image
+        imageElement.classList.add('w-full')
+        imageElement.classList.add('h-full')
+        imageElement.classList.add('object-cover')
+        imageElement.classList.add('rounded-2xl')
+        imagesElement.appendChild(imageElement)
+    }
 }
 
 async function trackCampground(){
