@@ -22,10 +22,10 @@ async function getTrackers() {
     stopSpinner()
 }
 
-function startSpinner(){
+function startSpinner() {
     let spinnerElement = document.getElementById('tracker-loader')
-    let spinnerHTML = 
-    `
+    let spinnerHTML =
+        `
     <div class="flex justify-center pb-8">
         <svg aria-hidden="true"
             class="inline w-10 h-10 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-yellow-400"
@@ -43,7 +43,7 @@ function startSpinner(){
     spinnerElement.innerHTML = spinnerHTML
 }
 
-function stopSpinner(){
+function stopSpinner() {
     document.getElementById('tracker-loader').innerHTML = ""
 }
 
@@ -127,7 +127,7 @@ function displayTrackers() {
         `
         let tr = document.createElement('tr')
         tr.classList.add("bg-white")
-       
+
         tr.innerHTML = tracker
         tracker_table.appendChild(tr)
     }
@@ -170,3 +170,41 @@ async function removeTracker(device_token, campground_id, campground_name, start
     // getTrackers()
     console.log(json)
 }
+
+let socket;
+
+const TRACKER = "TRACKER"
+
+function configureWebSocket() {
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    socket.onopen = (event) => {
+        displayMsg('system', 'Tracker Stream: ', 'connected ✅');
+    };
+    socket.onclose = (event) => {
+        displayMsg('system', 'Tracker Stream: ', 'disconnected ❌');
+    };
+    socket.onmessage = async (event) => {
+        const msg = JSON.parse(await event.data.text());
+        if (msg.type === TRACKER) {
+            displayMsg('player', msg.from, `set a tracker for<a href="https://www.recreation.gov/camping/campgrounds/${msg.value.campground_id}" class="underline"> ${msg.value.campground_name}</a>`);
+        }
+    };
+}
+
+function displayMsg(cls, from, msg) {
+    const chatText = document.querySelector('#tracker-messages');
+    chatText.innerHTML = chatText.innerHTML +
+        `<div class="event text-white"><span>${from}</span> ${msg}</div>`;
+}
+
+// function broadcastEvent(from, type, value) {
+//     const event = {
+//         from: from,
+//         type: type,
+//         value: value,
+//     };
+//     socket.send(JSON.stringify(event));
+// }
+
+configureWebSocket()

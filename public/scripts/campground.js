@@ -96,6 +96,8 @@ async function addTracker(campground_id, device_token, campground_name, start_da
         })
     })
     confirmTrackerSet()
+    const msg = { campground_id: campground_id, campground_name: campground_name, start_date: start_date, end_date: end_date}
+    broadcastEvent(device_token, "TRACKER", msg)
 }
 
 function confirmTrackerSet(){
@@ -107,3 +109,42 @@ function confirmTrackerSet(){
     </div>
     `
 }
+
+
+let socket;
+
+const SET_TRACKER = "TRACKER"
+
+function configureWebSocket() {
+    const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
+    socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
+    socket.onopen = (event) => {
+        displayMsg('system', 'Tracker Stream: ', 'connected ✅');
+    };
+    socket.onclose = (event) => {
+        displayMsg('system', 'Tracker Stream: ', 'disconnected ❌');
+    };
+    socket.onmessage = async (event) => {
+        const msg = JSON.parse(await event.data.text());
+        if (msg.type === TRACKER) {
+            displayMsg('player', msg.from, `Notification for : Hello world`);
+        }
+    };
+}
+
+function displayMsg(cls, from, msg) {
+    const chatText = document.querySelector('#tracker-messages');
+    chatText.innerHTML =
+        `<div class="event text-white"><span class="${cls}-event">${from}</span> ${msg}</div>` + chatText.innerHTML;
+}
+
+function broadcastEvent(from, type, value) {
+    const event = {
+      from: from,
+      type: type,
+      value: value,
+    };
+    socket.send(JSON.stringify(event));
+  }
+
+configureWebSocket()
