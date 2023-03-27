@@ -27,7 +27,7 @@ async function loginOrCreate(endpoint) {
     if (response?.status === 200) {
         localStorage.setItem('email', email);
         // window.location.href = '
-        window.location.href = "../../index.html"
+        window.location.href = "../../search.html"
     } else {
         // TODO: HANDLE LOGIN OR REGISTER ERROR
         console.log(body.msg)
