@@ -73,6 +73,10 @@ apiRouter.delete('/auth/logout', (_req, res) => {
     res.status(204).end();
 });
 
+apiRouter.get('/unsubscribe/:email', async (req, res) => {
+    
+})
+
 /**
  * secureApiRouter verifies credentials for endpoints
  */
@@ -105,7 +109,7 @@ function setAuthCookie(res, authToken) {
 
 secureApiRouter.get('/campgrounds', async (req, res) => {
     let json = await campsnatch.getCampgrounds()
-    res.setHeader('Cache-Control', 'max-age=3600');
+    // res.setHeader('Cache-Control', 'max-age=3600');
     res.send(json)
 })
 
@@ -167,8 +171,8 @@ app.use((_req, res) => {
 });
 
 
-const httpService = app.listen(8080, () => {
-    console.log(`Listening on port 8080`)
+const httpService = app.listen(6001, () => {
+    console.log(`Listening on port 6001`)
 })
 
 
