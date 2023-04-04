@@ -1,10 +1,11 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import './campground.css'
+import 'flowbite';
 
 export function Campground(props) {
     const { id, name } = useParams()
-
+    const numbers = Array.from({ length: 14 }, (_, i) => i + 1);
     const [campgroundDetails, setCampgroundDetails] = React.useState('')
     const [campgroundImages, setCampgroundImages] = React.useState([])
 
@@ -77,10 +78,37 @@ export function Campground(props) {
                                 </div>
                             </div>
                             <div className="bg-white p-4 grid grid-cols-1">
-                                <div id="campground-name"
-                                    className="flex  font-center text-center text-3xl font-bold border-b pb-4 border-gray-500">
-                                    {name}
+                                <div className='flex justify-between items-center border-b pb-4 border-gray-500'>
+                                    <div id="campground-name"
+                                        className="flex font-center text-center text-3xl font-bold">
+                                        {name}
+                                    </div>
+                                    <div>
+                                        <div className='flex rounded-lg border p-1'>
+                                            <div class="relative max-w-sm border-r focus:ring-0">
+                                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                                     <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                                                </div>
+                                                <input datepicker type="text" class="text-gray-900 text-sm block w-full pl-10 p-2.5 dark:text-white border-none focus:ring-0" placeholder="Select date"></input>
+                                            </div>
+
+                                            <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="text-black focus:outline-none font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center" type="button">Nights <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+
+                                            <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                                                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton">
+                                                    {numbers.map((num) => (
+                                                        <li>
+                                                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{num}</a>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
                                 </div>
+
                                 <div id="images"
                                     className="gap-4 columns-3 rows-2 rounded-lg mt-4">
                                     {campgroundImages.map((image, index) => (
@@ -136,6 +164,9 @@ export function Campground(props) {
                                         </div>
                                         <div id="campground-directions" dangerouslySetInnerHTML={{ __html: campgroundDetails.facilityDirections }}>
                                         </div>
+                                    </div>
+                                    <div>
+                                        <div inline-datepicker></div>
                                     </div>
                                 </div>
                             </div>
