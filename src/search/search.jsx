@@ -1,9 +1,12 @@
 // import { response } from "express";
 import React from "react";
-
+import { useNavigate } from 'react-router-dom';
+import { Campground } from "../campground/campground";
+import { Link } from "react-router-dom";
 import '../tailwinds.css'
 
 export function Search() {
+    const navigate = useNavigate();
     const [campgrounds, setCampgrounds] = React.useState([])
     const [filteredCampgrounds, setFilteredCampgrounds] = React.useState([])
     const [searchString, setSearchString] = React.useState('')
@@ -46,6 +49,11 @@ export function Search() {
         return campgroundRows
     }
 
+    // function selectCampground(campground_id, campground_name){
+    //     localStorage.setItem('campground_id', campground_id)
+    //     localStorage.setItem('campground_name', campground_name)
+    // }
+
     return (
         <div className="flex justify-center flex-col items-center justify-center mt-36">
             <form className="w-5/12">
@@ -62,8 +70,9 @@ export function Search() {
             <div className="w-5/12">
                 <ul>
                     {filteredCampgrounds.map((campground) => (
+                        <Link to={`/campground/${campground.id}/${campground.name}`}>
                         <div
-                            key={campground.id} className="select-none cursor-pointer hover:bg-gray-50 flex flex-1 items-center p-4" onclick="selectCampground(${campground.id}, '${campground.name}')">
+                            key={campground.id} className="select-none cursor-pointer hover:bg-gray-50 flex flex-1 items-center p-4">
                             <div className="flex-1 pl-1">
                                 <div class="font-medium dark:text-white">{campground.name}</div>
                             </div>
@@ -79,6 +88,7 @@ export function Search() {
                                 </button>
                             </div>
                         </div>
+                        </Link>
                     ))}
                 </ul>
             </div>

@@ -11,6 +11,7 @@ import { Login } from './login/login'
 import { AuthState } from './login/authState';
 import logo from './assets/tree.png'
 import { useNavigate } from 'react-router-dom';
+import { Campground } from './campground/campground';
 
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 
@@ -81,9 +82,11 @@ function App() {
               <li>
                 <NavLink to="map" className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Map</NavLink>
               </li>
+              {authState === AuthState.Authenticated && (
               <li>
                 <NavLink to="trackers" className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Trackers</NavLink>
               </li>
+              )}
             </ul>
           </div>
         </div>
@@ -103,6 +106,7 @@ function App() {
         <Route path='/search' element={<Search />} />
         <Route path='/map' element={<Map />} />
         <Route path='/trackers' element={<Tracker />} />
+        <Route path="/campground/:id/:name" element={<Campground />} />
       </Routes>
 
     </div>
