@@ -1005,6 +1005,10 @@ input[type="range"]::-ms-fill-lower {
   margin: 1rem;
 }
 
+.m-8 {
+  margin: 2rem;
+}
+
 .mx-4 {
   margin-left: 1rem;
   margin-right: 1rem;
@@ -1051,6 +1055,14 @@ input[type="range"]::-ms-fill-lower {
   margin-top: 3rem;
 }
 
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mb-24 {
+  margin-bottom: 6rem;
+}
+
 .block {
   display: block;
 }
@@ -1073,6 +1085,10 @@ input[type="range"]::-ms-fill-lower {
 
 .hidden {
   display: none;
+}
+
+.aspect-video {
+  aspect-ratio: 16 / 9;
 }
 
 .h-3\/6 {
@@ -1160,8 +1176,27 @@ input[type="range"]::-ms-fill-lower {
           user-select: none;
 }
 
+.columns-4 {
+  -webkit-columns: 4;
+          columns: 4;
+}
+
+.columns-3 {
+  -webkit-columns: 3;
+          columns: 3;
+}
+
+.columns-2 {
+  -webkit-columns: 2;
+          columns: 2;
+}
+
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .flex-row {
@@ -1204,6 +1239,10 @@ input[type="range"]::-ms-fill-lower {
   gap: 1rem;
 }
 
+.gap-8 {
+  gap: 2rem;
+}
+
 .divide-y > :not([hidden]) ~ :not([hidden]) {
   --tw-divide-y-reverse: 0;
   border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
@@ -1242,6 +1281,18 @@ input[type="range"]::-ms-fill-lower {
   border-width: 1px;
 }
 
+.border-2 {
+  border-width: 2px;
+}
+
+.border-b-2 {
+  border-bottom-width: 2px;
+}
+
+.border-b {
+  border-bottom-width: 1px;
+}
+
 .border-gray-100 {
   --tw-border-opacity: 1;
   border-color: rgb(243 244 246 / var(--tw-border-opacity));
@@ -1250,6 +1301,11 @@ input[type="range"]::-ms-fill-lower {
 .border-gray-300 {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
+}
+
+.border-gray-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(107 114 128 / var(--tw-border-opacity));
 }
 
 .bg-blue-700 {
@@ -1270,6 +1326,11 @@ input[type="range"]::-ms-fill-lower {
 .bg-yellow-400 {
   --tw-bg-opacity: 1;
   background-color: rgb(227 160 8 / var(--tw-bg-opacity));
+}
+
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
 .object-cover {
@@ -1341,6 +1402,14 @@ input[type="range"]::-ms-fill-lower {
 
 .pr-4 {
   padding-right: 1rem;
+}
+
+.pb-4 {
+  padding-bottom: 1rem;
+}
+
+.pb-8 {
+  padding-bottom: 2rem;
 }
 
 .text-left {

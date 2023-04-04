@@ -63,7 +63,7 @@ export function Campground(props) {
     return (
         <main>
             <div className="h-5/6 flex flex-row justify-center items-center flex-wrap">
-                <div className="md:w-9/12 h-5/6 m-4">
+                <div className="md:w-9/12 h-5/6">
                     <div className="">
                         <div className=" flex justify-center items-center content-center flex-row flex-wrap">
                             <div className="flex w-full mb-8">
@@ -76,19 +76,19 @@ export function Campground(props) {
                                     </div>
                                 </div>
                             </div>
-                            <div className="bg-white p-8 grid grid-cols-1">
-                            <div id="images"
-                                    className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                                    {campgroundImages.map((image, index) => (
-                                        <img key={index} src={image} alt={`Image ${index}`} className='rounded-lg'/>
-                                    ))}
-                                </div>
+                            <div className="bg-white p-4 grid grid-cols-1">
                                 <div id="campground-name"
-                                    className="flex justify-center items-center font-center text-center text-3xl font-bold mt-12">
+                                    className="flex  font-center text-center text-3xl font-bold border-b pb-4 border-gray-500">
                                     {name}
                                 </div>
+                                <div id="images"
+                                    className="gap-4 columns-3 rows-2 rounded-lg mt-4">
+                                    {campgroundImages.map((image, index) => (
+                                        <img key={index} src={image} alt={`Image ${index}`} className={`w-full mb-4 rounded-lg aspect-${index % 5 === 0 ? 'video' : 'square'}`} />
+                                    ))}
+                                </div>
                                 <div>
-                                    <form>
+                                    {/* <form>
                                         <div date-rangepicker className="flex flex-wrap justify-center p-8 items-center">
                                             <div className="relative">
                                                 <div
@@ -125,15 +125,17 @@ export function Campground(props) {
                                                 className="px-5 py-2 m-4 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                                                 onclick="trackCampground()">Track</button>
                                         </div>
-                                    </form>
-                                    <div id="confirmation-toast" className="flex justify-center items-center">
+                                    </form> */}
+                                    {/* <div id="confirmation-toast" className="flex justify-center items-center">
 
-                                    </div>
+                                    </div> */}
                                 </div>
-                                <div className="overflow-y-auto h-auto max-h-96">
-                                    <div id="campground-description" dangerouslySetInnerHTML={{ __html: campgroundDetails.facilityDescription }}>
-                                    </div>
-                                    <div id="campground-directions" dangerouslySetInnerHTML={{ __html: campgroundDetails.facilityDirections }}>
+                                <div className='grid grid-cols-1 gap-4 mt-8'>
+                                    <div className="h-auto mb-24">
+                                        <div id="campground-description" dangerouslySetInnerHTML={{ __html: campgroundDetails.facilityDescription }}>
+                                        </div>
+                                        <div id="campground-directions" dangerouslySetInnerHTML={{ __html: campgroundDetails.facilityDirections }}>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
