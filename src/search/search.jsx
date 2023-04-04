@@ -25,12 +25,17 @@ export function Search() {
 
     React.useEffect(() => {
         const handleKeyDown = () => {
+            if (searchString === ''){
+                console.log('empty')
+                setFilteredCampgrounds([])
+                return
+            }
             if (campgrounds.length > 10) {
                 setFilteredCampgrounds(campgrounds.filter(campground => campground.name.toLowerCase().includes(searchString)).slice(0, 10))
             }
         }
 
-        document.addEventListener("keydown", handleKeyDown)
+        document.addEventListener("input", handleKeyDown)
     }, [campgrounds, searchString])
 
     function parseCampgrounds(campgrounds) {
@@ -43,7 +48,7 @@ export function Search() {
 
     return (
         <div className="flex justify-center flex-col items-center justify-center mt-36">
-            <form className="xl:w-5/12">
+            <form className="w-5/12">
                 <h1 className="text-center md:text-7xl text-5xl font-black mb-8 ">Campsnatch</h1>
                 <label for="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                 <div className="relative">
@@ -54,7 +59,7 @@ export function Search() {
                     <button type="submit" className="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
                 </div>
             </form>
-            <div>
+            <div className="w-5/12">
                 <ul>
                     {filteredCampgrounds.map((campground) => (
                         <div

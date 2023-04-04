@@ -109,7 +109,7 @@ function setAuthCookie(res, authToken) {
 
 secureApiRouter.get('/campgrounds', async (req, res) => {
     let json = await campsnatch.getCampgrounds()
-    // res.setHeader('Cache-Control', 'max-age=3600');
+    res.setHeader('Cache-Control', 'max-age=36000');
     res.send(json)
 })
 
