@@ -1118,6 +1118,10 @@ input[type="range"]::-ms-fill-lower {
   height: 1rem;
 }
 
+.h-3\/6 {
+  height: 50%;
+}
+
 .min-h-screen {
   min-height: 100vh;
 }
@@ -1148,6 +1152,10 @@ input[type="range"]::-ms-fill-lower {
 
 .w-4 {
   width: 1rem;
+}
+
+.w-7\/12 {
+  width: 58.333333%;
 }
 
 .max-w-screen-xl {
@@ -1183,8 +1191,16 @@ input[type="range"]::-ms-fill-lower {
   flex-wrap: wrap;
 }
 
+.content-center {
+  align-content: center;
+}
+
 .items-center {
   align-items: center;
+}
+
+.justify-start {
+  justify-content: flex-start;
 }
 
 .justify-end {
@@ -1258,6 +1274,11 @@ input[type="range"]::-ms-fill-lower {
   background-color: rgb(255 145 25 / var(--tw-bg-opacity));
 }
 
+.bg-yellow-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(227 160 8 / var(--tw-bg-opacity));
+}
+
 .p-2 {
   padding: 0.5rem;
 }
@@ -1272,6 +1293,10 @@ input[type="range"]::-ms-fill-lower {
 
 .p-5 {
   padding: 1.25rem;
+}
+
+.p-2\.5 {
+  padding: 0.625rem;
 }
 
 .px-4 {
@@ -1448,6 +1473,11 @@ input[type="range"]::-ms-fill-lower {
   background-color: rgb(255 145 25 / 0.8);
 }
 
+.hover\:bg-yellow-500:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(194 120 3 / var(--tw-bg-opacity));
+}
+
 .hover\:text-gray-800:hover {
   --tw-text-opacity: 1;
   color: rgb(31 41 55 / var(--tw-text-opacity));
@@ -1496,6 +1526,11 @@ input[type="range"]::-ms-fill-lower {
 
 .focus\:ring-\[\#FF9119\]\/50:focus {
   --tw-ring-color: rgb(255 145 25 / 0.5);
+}
+
+.focus\:ring-yellow-300:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(250 202 21 / var(--tw-ring-opacity));
 }
 
 :is(.dark .dark\:border-gray-600) {
@@ -1601,6 +1636,11 @@ input[type="range"]::-ms-fill-lower {
   --tw-ring-color: rgb(255 145 25 / 0.4);
 }
 
+:is(.dark .dark\:focus\:ring-yellow-900:focus) {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgb(99 49 18 / var(--tw-ring-opacity));
+}
+
 @media (min-width: 640px) {
   .sm\:rounded-lg {
     border-radius: 0.5rem;
@@ -1634,6 +1674,10 @@ input[type="range"]::-ms-fill-lower {
 
   .md\:w-auto {
     width: auto;
+  }
+
+  .md\:w-5\/12 {
+    width: 41.666667%;
   }
 
   .md\:flex-row {
