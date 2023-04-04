@@ -6,7 +6,8 @@ export function Campground(props) {
     const { id, name } = useParams()
 
     const [campgroundDetails, setCampgroundDetails] = React.useState('')
-    
+    const [campgroundImages, setCampgroundImages] = React.useState([])
+
     React.useEffect(() => {
         async function getCampgroundDetails(campground_id) {
             return await fetch('https://tt7sxvlds5.execute-api.us-west-2.amazonaws.com/dev/campground_description', {
@@ -21,11 +22,40 @@ export function Campground(props) {
             })
         }
 
+        async function getCampgroundImages(campground_id) {
+            return await fetch('/api/campground/images', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    'campground_id': `${campground_id}`,
+                })
+            })
+            // let json = await response.json()
+            // let images = json.images
+
+            // let imagesElement = document.querySelector("#images")
+
+            // for(const image of images){
+            //     var imageElement = document.createElement("img")
+            //     imageElement.src = image
+            //     imageElement.classList.add('w-full')
+            //     imageElement.classList.add('h-full')
+            //     imageElement.classList.add('object-cover')
+            //     imageElement.classList.add('rounded-2xl')
+            //     imagesElement.appendChild(imageElement)
+            // }
+        }
+
         if (id) {
             getCampgroundDetails(id)
                 .then((response) => response.json())
-                // .then((data) => console.log(data))
                 .then((data) => setCampgroundDetails(data))
+                .then(() => getCampgroundImages(id))
+                .then((response) => response.json())
+                .then((data) => setCampgroundImages(data.images))
                 .catch((e) => console.log(e))
         }
     }, [])
@@ -47,8 +77,14 @@ export function Campground(props) {
                                 </div>
                             </div>
                             <div className="bg-white p-8 grid grid-cols-1">
+                            <div id="images"
+                                    className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                    {campgroundImages.map((image, index) => (
+                                        <img key={index} src={image} alt={`Image ${index}`} className='rounded-lg'/>
+                                    ))}
+                                </div>
                                 <div id="campground-name"
-                                    className="flex justify-center items-center font-center text-center text-3xl font-bold">
+                                    className="flex justify-center items-center font-center text-center text-3xl font-bold mt-12">
                                     {name}
                                 </div>
                                 <div>
@@ -99,10 +135,6 @@ export function Campground(props) {
                                     </div>
                                     <div id="campground-directions" dangerouslySetInnerHTML={{ __html: campgroundDetails.facilityDirections }}>
                                     </div>
-                                </div>
-                                <div id="images"
-                                    className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-
                                 </div>
                             </div>
                         </div>
