@@ -1,0 +1,25 @@
+{
+  "name": "startup-v3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.2.7"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1342.0",
+    "bcrypt": "^5.1.0",
+    "cookie-parser": "^1.4.6",
+    "datepicker.js": "^0.0.1-beta1",
+    "express": "^4.18.2",
+    "flowbite": "^1.6.4",
+    "mongodb": "^5.1.0",
+    "uuid": "^9.0.0",
+    "ws": "^8.13.0"
+  }
+}
