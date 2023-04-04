@@ -413,6 +413,94 @@ wss.on('connection', (ws) => {
 });
 ```
 
+# Components
+
+📖 **Recommended reading**: [React.dev - Your First Component](https://react.dev/learn/your-first-component)
+
+React components allow you to modularize the functionality of your application. This allows the underlying code to directly represent the components that a user interacts with. It also enables code reuse as common application component often show up repeatedly.
+
+## The render function
+
+One of the primary purposes of a component is to generate user interface. This is done with the components `render` function. Whatever is returned from the render function is inserted into the component HTML element.
+
+As a simple example, a JSX file containing a React component element named `Demo` would cause React to load the `Demo` component, call the render function, and insert the result into the place of the `Demo` element.
+
+**JSX**
+
+```jsx
+<div>
+  Component: <Demo />
+</div>
+```
+
+Notice that `Demo` is not a valid HTML element. The transpiler will replace this tag with the resulting rendered HTML.
+
+**React component**
+
+```js
+function Demo() {
+  const who = 'world';
+  return <b>Hello {who}</b>;
+}
+```
+
+**Resulting HTML**
+
+```html
+<div>Component: <b>Hello world</b></p>
+```
+
+## Properties
+
+React components also allow you to pass information to them in the form of element properties. The component receives the properties in its constructor and then can display them when it renders.
+
+**JSX**
+
+```jsx
+<div>Component: <Demo who="Walke" /><div>
+```
+
+**React component**
+
+```jsx
+function Demo(props) {
+  return <b>Hello {props.who}</b>;
+}
+```
+
+**Resulting HTML**
+
+```html
+<div>Component: <b>Hello Walke</b></div>
+```
+
+## State
+
+In addition to properties, a component can have internal state. Component state is created by calling the `React.useState` hook function. The useState function returns a variable that contains the current state and a function to update the state. The following example creates a state variable called `clicked` toggles the click state in the `updateClicked` function that gets called when the paragraph text is clicked.
+
+```jsx
+const Clicker = () => {
+  const [clicked, updateClicked] = React.useState(false);
+
+  const onClicked = (e) => {
+    updateClicked(!clicked);
+  };
+
+  return <p onClick={(e) => onClicked(e)}>clicked: {`${clicked}`}</p>;
+};
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Clicker />);
+```
+
+You should note that you can use JSX even without a function. A simple variable representing JSX will work anyplace you would otherwise provide a component.
+
+```jsx
+const hello = <div>Hello</div>;
+
+ReactDOM.render(hello, document.getElementById('root'));
+```
+
 # Router
 
 🔑 **Required reading**: [React Router DOM Tutorial](https://blog.webdevsimplified.com/2022-07/react-router/)
@@ -452,3 +540,4 @@ root.render(
   </BrowserRouter>
 );
 ```
+
