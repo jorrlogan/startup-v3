@@ -34,13 +34,11 @@ export function Unauthenticated(props) {
 
   return (
     <>
-      <div className="flex justify-start items-center content-center flex-col">
+      <div className="flex justify-start items-center content-center flex-col mt-24">
         <div
           className="md:w-5/12 h-3/6 flex justify-center content-center items-center flex-wrap flex-col p-8 rounded-lg bg-opacity-8 ">
-          <div className="mb-8">
-            <img src="./assets/fire-gif.gif" width="200px" />
-          </div>
-          <p className="md:text-7xl text-5xl font-black mb-8 text-white">Campsnatch</p>
+          <h1 className="text-center md:text-4xl text-4xl font-bold mb-8 ">Login</h1>
+          {/* <p className="md:text-7xl text-5xl font-black mb-8 text-white">Campsnatch</p> */}
           <div className="w-7/12">
             <div className="mb-3">
               <label for="email" className="block mb-2 text-sm font-medium text-black dark:text-white">Email
@@ -58,7 +56,7 @@ export function Unauthenticated(props) {
             </div>
             <div className="w-full flex justify-center">
               <button type="submit"
-                className="focus:outline-none text-black bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:focus:ring-yellow-900"
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 onClick={() => loginUser()}>Log in</button>
             </div>
             <div id="error-message" className="flex justify-center">

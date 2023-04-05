@@ -57,7 +57,7 @@ export function Search() {
     return (
         <div className="flex justify-center flex-col items-center justify-center mt-36">
             <form className="w-5/12">
-                {/* <h1 className="text-center md:text-4xl text-4xl font-heavy mb-8 ">Search</h1> */}
+                <h1 className="text-center md:text-4xl text-4xl font-bold mb-8 ">What Campground Are You Looking For?</h1>
                 <label for="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                 <div className="relative">
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
