@@ -17,6 +17,7 @@ export function Tracker() {
     }, [])
 
     async function removeTracker(device_token, campground_id, campground_name, start_date, end_date) {
+        setLoaded(false)
         console.log('removing tracker')
         console.log(device_token)
         console.log(campground_id)
@@ -132,30 +133,34 @@ export function Tracker() {
         <div className="">
             <div className="m-4 flex flex-col justify-center items-center">
                 <div className="w-9/12">
-                    { !loaded && (
-                    <div className='flex justify-center'>
-                        <Spinner
-                            color="info"
-                            aria-label="Info spinner example"
-                            size="xl"
-                            className='mt-8'
-                        />
-                    </div>
-                    )}
-                    <div className="relative shadow-md sm:rounded-lg rounded-lg bg-white overflow-x-auto">
-                        <table className="text-sm text-left text-gray-500 dark:text-gray-400 w-full">
-                            <thead id="tracker-table-head"
-                                className="text-xs  text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                {tableHead}
-                            </thead>
-                            <tbody id="tracker-table-body">
-                                {trackerRows}
-                            </tbody>
-                        </table>
-                        <div id="tracker-loader">
-
+                    {!loaded && (
+                        <div className='flex justify-center'>
+                            <Spinner
+                                color="info"
+                                aria-label="Info spinner example"
+                                size="xl"
+                                className='mt-8'
+                            />
                         </div>
-                    </div>
+                    )}
+                    {loaded && (
+                        <div className="relative shadow-md sm:rounded-lg rounded-lg bg-white overflow-x-auto">
+                            <table className="text-sm text-left text-gray-500 dark:text-gray-400 w-full">
+                                <thead id="tracker-table-head"
+                                    className="text-xs  text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                    {tableHead}
+                                </thead>
+                                <tbody id="tracker-table-body">
+                                    {trackerRows}
+                                </tbody>
+                            </table>
+                            <div>
+                                {trackerRows.length === 0 && (
+                                    <p className='text-center p-8'>You haven't set any trackers</p>
+                                )}
+                            </div>
+                        </div>
+                    )}
 
                     <div id="tracker-messages">
 
