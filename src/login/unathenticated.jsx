@@ -1,10 +1,12 @@
 import { useState } from 'react';
 
+import { Button } from 'flowbite-react';
 // import { MessageDialog } from './messageDialog';
 
 export function Unauthenticated(props) {
   const [userName, setUserName] = useState(props.userName);
   const [password, setPassword] = useState('');
+  const [isLogin, setIsLogin] = useState(true)
   const [displayError, setDisplayError] = useState(null);
 
   async function loginUser() {
@@ -23,11 +25,13 @@ export function Unauthenticated(props) {
         'Content-type': 'application/json; charset=UTF-8',
       },
     });
+    console.log(response)
     if (response?.status === 200) {
       localStorage.setItem('userName', userName);
       props.onLogin(userName);
     } else {
       const body = await response.json();
+      console.log(body)
       setDisplayError(`⚠ Error: ${body.msg}`);
     }
   }
@@ -36,10 +40,12 @@ export function Unauthenticated(props) {
     <>
       <div className="flex justify-start items-center content-center flex-col mt-24">
         <div
-          className="md:w-5/12 h-3/6 flex justify-center content-center items-center flex-wrap flex-col p-8 rounded-lg bg-opacity-8 ">
-          <h1 className="text-center md:text-4xl text-4xl font-bold mb-8 ">Login</h1>
+          className="xl:w-3/12 lg:w-4/12 md:w-6/12 w-full h-3/6 flex justify-center content-center items-center flex-wrap flex-col p-8 rounded-lg bg-opacity-8 ">
+          {/* {isLogin && (<h1 className="text-center md:text-4xl text-4xl font-bold mb-8 ">Login</h1>)}
+          {!isLogin && (<h1 className="text-center md:text-4xl text-4xl font-bold mb-8 ">Sign Up</h1>)} */}
+          <h1 className="text-center md:text-4xl text-4xl font-bold mb-8 ">Campsnatch</h1>
           {/* <p className="md:text-7xl text-5xl font-black mb-8 text-white">Campsnatch</p> */}
-          <div className="w-7/12">
+          <div className="w-full">
             <div className="mb-3">
               <label for="email" className="block mb-2 text-sm font-medium text-black dark:text-white">Email
                 address</label>
@@ -54,13 +60,15 @@ export function Unauthenticated(props) {
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="•••••••••" required onChange={(e) => setPassword(e.target.value)}></input>
             </div>
-            <div className="w-full flex justify-center">
-              <button type="submit"
-                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                onClick={() => loginUser()}>Log in</button>
+            <div className='flex justify-center flex-row'>
+              <div className=''>
+              <button className={`text-white p-2 m-4 w-24 rounded-lg bg-blue-700`} onClick={() => loginUser()}>Login</button>
+
+              <button className={`text-white p-2 m-4 w-24 rounded-lg bg-blue-700`} onClick={() => createUser()}>Sign Up</button>
+            </div>
             </div>
             <div id="error-message" className="flex justify-center">
-
+              {displayError}
             </div>
           </div>
         </div>
