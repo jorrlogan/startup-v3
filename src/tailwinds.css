@@ -2953,6 +2953,14 @@ input:checked + .toggle-bg {
   padding-left: 1rem;
 }
 
+.pl-20 {
+  padding-left: 5rem;
+}
+
+.pr-20 {
+  padding-right: 5rem;
+}
+
 .text-left {
   text-align: left;
 }
@@ -5683,6 +5691,10 @@ input:checked + .toggle-bg {
 
   .lg\:w-4\/12 {
     width: 33.333333%;
+  }
+
+  .lg\:w-9\/12 {
+    width: 75%;
   }
 
   .lg\:pl-8 {

@@ -52,10 +52,10 @@ function App() {
 
 
   return (
-    <div>
+    <div className='w-screenflex justify-center flex-col'>
 
-      <nav className="bg-white dark:bg-gray-900 fixed sticky top-0">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto pt-4 pb-4">
+      <nav className="bg-white dark:bg-gray-900 fixed sticky top-0 pt-4 pb-4">
+        <div className="lg:w-9/12 flex flex-wrap items-center justify-between mx-auto pt-4 pb-4">
           <NavLink to="/search" className="flex items-center">
             <img src={logo} className="h-8 mr-3" alt="Campsnatch Logo"></img>
             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Campsnatch</span>
