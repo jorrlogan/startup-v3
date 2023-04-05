@@ -19,7 +19,9 @@ const Map = () => {
             const data = await parseLocations(campgrounds.campgrounds)
             setData(data);
         };
-        fetchData();
+        if (data === null){
+            fetchData();
+        }
     }, []);
 
     useEffect(() => {
