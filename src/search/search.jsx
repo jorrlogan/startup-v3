@@ -28,7 +28,7 @@ export function Search() {
 
     React.useEffect(() => {
         const handleKeyDown = () => {
-            if (searchString === ''){
+            if (searchString === '') {
                 console.log('empty')
                 setFilteredCampgrounds([])
                 return
@@ -57,7 +57,7 @@ export function Search() {
     return (
         <div className="flex justify-center flex-col items-center justify-center mt-36">
             <form className="w-5/12">
-                <h1 className="text-center md:text-4xl text-4xl font-heavy mb-8 ">Search</h1>
+                {/* <h1 className="text-center md:text-4xl text-4xl font-heavy mb-8 ">Search</h1> */}
                 <label for="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                 <div className="relative">
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -71,23 +71,23 @@ export function Search() {
                 <ul>
                     {filteredCampgrounds.map((campground) => (
                         <Link to={`/campground/${campground.id}/${campground.name}`}>
-                        <div
-                            key={campground.id} className="select-none cursor-pointer hover:bg-gray-50 flex flex-1 items-center p-4">
-                            <div className="flex-1 pl-1">
-                                <div class="font-medium dark:text-white">{campground.name}</div>
+                            <div
+                                key={campground.id} className="select-none cursor-pointer hover:bg-gray-50 flex flex-1 items-center p-4">
+                                <div className="flex-1 pl-1">
+                                    <div class="font-medium dark:text-white">{campground.name}</div>
+                                </div>
+                                <div className="flex flex-row justify-center">
+                                    <button class="w-10 text-right flex justify-end">
+                                        <svg width="20" fill="currentColor" height="20"
+                                            className="hover:text-gray-800 dark:hover:text-white dark:text-gray-200 text-gray-500"
+                                            viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M1363 877l-742 742q-19 19-45 19t-45-19l-166-166q-19-19-19-45t19-45l531-531-531-531q-19-19-19-45t19-45l166-166q19-19 45-19t45 19l742 742q19 19 19 45t-19 45z">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
-                            <div className="flex flex-row justify-center">
-                                <button class="w-10 text-right flex justify-end">
-                                    <svg width="20" fill="currentColor" height="20"
-                                        className="hover:text-gray-800 dark:hover:text-white dark:text-gray-200 text-gray-500"
-                                        viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M1363 877l-742 742q-19 19-45 19t-45-19l-166-166q-19-19-19-45t19-45l531-531-531-531q-19-19-19-45t19-45l166-166q19-19 45-19t45 19l742 742q19 19 19 45t-19 45z">
-                                        </path>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
                         </Link>
                     ))}
                 </ul>

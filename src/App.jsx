@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { NavLink, Route, Routes } from 'react-router-dom';
 import './App.css';
 import './tailwinds.css'
@@ -13,13 +13,14 @@ import logo from './assets/tree.png'
 import { useNavigate } from 'react-router-dom';
 import { Campground } from './campground/campground';
 
-import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
+import mapboxgl from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
+
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoiam9ycmxvZ2FuIiwiYSI6ImNsZnVqMTIydjAycTAzZ250bG1wc2xmc3cifQ.mZwH-XJARtUN7Ru4Y9N-mA';
 
 function App() {
   const navigate = useNavigate();
-
   const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
 
   // Asynchronously determine if the user is authenticated by calling the service
@@ -55,7 +56,7 @@ function App() {
 
       <nav className="bg-white dark:bg-gray-900 fixed sticky top-0">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <NavLink to="" className="flex items-center">
+          <NavLink to="/search" className="flex items-center">
             <img src={logo} className="h-8 mr-3" alt="Campsnatch Logo"></img>
             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Campsnatch</span>
           </NavLink>
@@ -74,7 +75,7 @@ function App() {
           <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
             <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
               <li>
-                <NavLink to="" className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">About</NavLink>
+                <NavLink to="about" className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">About</NavLink>
               </li>
               <li>
                 <NavLink to="search" className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Search</NavLink>
@@ -94,7 +95,7 @@ function App() {
 
 
       <Routes>
-        <Route path='/' element={<About />} />
+        <Route path='/about' element={<About />} />
         <Route path='/login' element={<Login
           userName={userName}
           authState={authState}

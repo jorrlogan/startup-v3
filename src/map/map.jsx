@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
 import mapboxgl from "mapbox-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
+import './map.css'
+import { Link } from "react-router-dom";
+import ReactDOMServer from "react-dom/server";
+
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoiam9ycmxvZ2FuIiwiYSI6ImNsZnVqMTIydjAycTAzZ250bG1wc2xmc3cifQ.mZwH-XJARtUN7Ru4Y9N-mA';
 
@@ -18,6 +23,7 @@ const Map = () => {
     }, []);
 
     useEffect(() => {
+        console.log(data)
         if (data && map) {
             const geojson = {
                 type: "FeatureCollection",
@@ -34,43 +40,21 @@ const Map = () => {
                 })),
             };
 
-            map.on("load", () => {
-                map.addSource("points", {
-                    type: "geojson",
-                    cluster: true,
-                    clusterMaxZoom: 22,
-                    clusterRadius: 50,
-                    data: geojson,
-                });
-                map.addLayer({
-                    id: "points",
-                    type: "circle",
-                    source: "points",
-                    paint: {
-                        "circle-radius": 6,
-                        "circle-color": "#007cbf",
-                      },
-                });
-
-                map.on("click", "points", (e) => {
-                    const coordinates = e.features[0].geometry.coordinates.slice();
-                    const { name, description } = e.features[0].properties;
-
-                    new mapboxgl.Popup()
-                        .setLngLat(coordinates)
-                        .setHTML(`<h3>${name}</h3><p>${description}</p>`)
-                        .addTo(map);
-                });
-
-                map.on("mouseenter", "points", () => {
-                    map.getCanvas().style.cursor = "pointer";
-                });
-
-                map.on("mouseleave", "points", () => {
-                    map.getCanvas().style.cursor = "";
-                });
-            });
-        }
+      data.forEach((point) => {
+        new mapboxgl.Marker()
+        .setLngLat([point.longitude, point.latitude])
+        .setPopup(
+            new mapboxgl.Popup({ offset: 25 }) // add popups
+              .setHTML(
+                `<h3><a href=${`${'http://localhost:6002/campground/' + point.id + '/' + encodeURIComponent(point.name)}`}>${point.name}</a></h3>`  
+                // `<h3>${point.name}</h3>`
+              )
+          )
+        .addTo(map);
+      });
+      // Clean up
+      return () => map.remove();
+    }
     }, [data, map]);
 
     useEffect(() => {
@@ -100,6 +84,7 @@ const Map = () => {
                 let latitude = geo_json["COORDINATES"][1]
                 if (longitude !== null && latitude !== null) {
                     features.push({
+                        id: campgrounds[i].campground_id,
                         name: campgrounds[i].campground_name,
                         longitude: longitude,
                         latitude: latitude
@@ -120,3 +105,48 @@ const Map = () => {
 };
 
 export default Map;
+
+
+
+
+
+// import React, { useEffect, useRef, useState } from "react";
+// import mapboxgl from "mapbox-gl";
+// import "mapbox-gl/dist/mapbox-gl.css";
+
+// mapboxgl.accessToken = "pk.eyJ1Ijoiam9ycmxvZ2FuIiwiYSI6ImNsZnVqMTIydjAycTAzZ250bG1wc2xmc3cifQ.mZwH-XJARtUN7Ru4Y9N-mA";
+
+// const Map = () => {
+//     const [lng, setLng] = useState(-73.985664);
+//     const [lat, setLat] = useState(40.748514);
+//     const [zoom, setZoom] = useState(12);
+//     const mapRef = useRef(null);
+  
+//     useEffect(() => {
+//       const map = new mapboxgl.Map({
+//         container: mapRef.current,
+//         style: "mapbox://styles/mapbox/streets-v11",
+//         center: [lng, lat],
+//         zoom: zoom,
+//       });
+  
+//       // Define the coordinates for your points
+//       const points = [
+//         [-73.9817, 40.7634],
+//         [-73.9858, 40.7464],
+//         [-73.9735, 40.7648],
+//       ];
+  
+//       // Add the points to the map
+//       points.forEach((point) => {
+//         new mapboxgl.Marker().setLngLat(point).addTo(map);
+//       });
+  
+//       // Clean up
+//       return () => map.remove();
+//     }, []);
+  
+//     return <div ref={mapRef} style={{ width: "100%", height: "500px" }} />;
+//   };
+  
+//   export default Map;
