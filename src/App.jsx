@@ -95,6 +95,7 @@ function App() {
 
 
       <Routes>
+      <Route path='/' element={<About />} />
         <Route path='/about' element={<About />} />
         <Route path='/login' element={<Login
           userName={userName}
@@ -107,7 +108,7 @@ function App() {
         <Route path='/search' element={<Search />} />
         <Route path='/map' element={<Map />} />
         <Route path='/trackers' element={<Tracker />} />
-        <Route path="/campground/:id/:name" element={<Campground />} />
+        <Route path="/campground/:id/:name" element={<Campground authState={authState}/>} />
       </Routes>
 
     </div>

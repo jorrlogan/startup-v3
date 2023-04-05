@@ -49,11 +49,6 @@ export function Search() {
         return campgroundRows
     }
 
-    // function selectCampground(campground_id, campground_name){
-    //     localStorage.setItem('campground_id', campground_id)
-    //     localStorage.setItem('campground_name', campground_name)
-    // }
-
     return (
         <div className="flex justify-center flex-col items-center justify-center mt-36">
             <form className="w-5/12">

@@ -113,7 +113,7 @@ secureApiRouter.get('/campgrounds', async (req, res) => {
     res.send(json)
 })
 
-secureApiRouter.post('/campground/images', async (req, res) => {
+apiRouter.post('/campground_images', async (req, res) => {
     let images = await campsnatch.getCampgroundImages(req.body.campground_id)
     res.send({ images: images })
 })

@@ -5,8 +5,9 @@ import 'flowbite';
 import Datepicker from "flowbite-datepicker/Datepicker";
 import { Button, TextInput } from 'flowbite-react';
 import { Spinner } from 'flowbite-react';
+import { AuthState } from '../login/authState';
 
-export function Campground(props) {
+export function Campground({authState}) {
     const { id, name } = useParams()
     const [campgroundDetails, setCampgroundDetails] = React.useState('')
     const [campgroundImages, setCampgroundImages] = React.useState([])
@@ -14,6 +15,7 @@ export function Campground(props) {
     const [date, setDate] = React.useState(null)
     const [nights, setNights] = React.useState(1)
     const [trackerItem, setTrackerItem] = React.useState(false)
+   console.log('authState:' + authState)
 
     React.useEffect(() => {
 
@@ -61,7 +63,7 @@ export function Campground(props) {
         }
 
         async function getCampgroundImages(campground_id) {
-            return await fetch('/api/campground/images', {
+            return await fetch('/api/campground_images', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -86,7 +88,7 @@ export function Campground(props) {
     }, [])
 
     React.useEffect(() => {
-        if (loaded) {
+        if (loaded && authState === AuthState.Authenticated) {
             const datepickerEl = document?.getElementById("datepickerId");
             new Datepicker(datepickerEl, {});
         }
@@ -119,20 +121,21 @@ export function Campground(props) {
 
                                     <div id="images"
                                         className="gap-4 columns-3 rounded-lg mt-4">
-                                        {campgroundImages.slice(0, 6).map((image, index) => (
+                                        {campgroundImages !== undefined && campgroundImages.slice(0, 6).map((image, index) => (
                                             <img key={index} src={image} alt={`Image ${index}`} className={`w-full mb-4 rounded-lg`} />
                                         ))}
                                     </div>
                                     <div>
                                     </div>
-                                    <div className='flex mt-8'>
-                                        <div className="h-auto mb-24 w-3/4">
+                                    <div className='flex mt-8 flex-wrap mb-24'>
+                                        <div className="h-auto lg:w-3/4 w-full mb-8">
                                             <div id="campground-description" dangerouslySetInnerHTML={{ __html: campgroundDetails.facilityDescription }}>
                                             </div>
                                             <div id="campground-directions" dangerouslySetInnerHTML={{ __html: campgroundDetails.facilityDirections }}>
                                             </div>
                                         </div>
-                                        <div className='flex p-1 w-1/4 pl-8'>
+                                        {authState === AuthState.Authenticated && (
+                                        <div className='flex p-1 lg:w-1/4 w-screen lg:pl-8'>
                                             <div className='flex flex-col w-full'>
                                                 <div className='flex flex-col rounded-lg border mr-4 w-full mb-6'>
                                                     <div className="relative w-full border-b p-1">
@@ -167,7 +170,8 @@ export function Campground(props) {
 
                                                     </div>
                                                     <div>
-                                                        <input type="number" id="first_name" class="text-gray-900 text-sm rounded-lg border-none focus:ring-0  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Num nights" required></input>
+                                                        <input type="number" id="first_name" class="text-gray-900 text-sm rounded-lg border-none focus:ring-0  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" placeholder="Num nights" required
+                                                        onChange={(e) => setNights(e.target.value)}></input>
                                                     </div>
                                                 </div>
                                                 <div>
@@ -177,7 +181,7 @@ export function Campground(props) {
                                                 </div>
                                             </div>
                                         </div>
-
+                                        )}
                                     </div>
                                 </div>
                             </div>
