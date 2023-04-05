@@ -61,7 +61,7 @@ export function Campground(props) {
                 <div className="md:w-9/12 h-5/6">
                     <div className="">
                         <div className=" flex justify-center items-center content-center flex-row flex-wrap">
-                            <div className="flex w-full mb-8">
+                            {/* <div className="flex w-full mb-8">
                                 <div className="flex w-full">
                                     <div
                                         className="flex flex-col container mx-auto items-center justify-center bg-white dark:bg-gray-800 rounded-lg shadow">
@@ -70,7 +70,7 @@ export function Campground(props) {
                                         </ul>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                             <div className="bg-white p-4 grid grid-cols-1">
                                 <div className='flex justify-between items-center border-b pb-4 border-gray-500'>
                                     <div id="campground-name"
@@ -135,7 +135,7 @@ export function Campground(props) {
 
                                 <div id="images"
                                     className="gap-4 columns-3 rounded-lg mt-4">
-                                    {campgroundImages.map((image, index) => (
+                                    {campgroundImages.slice(0,6).map((image, index) => (
                                         <img key={index} src={image} alt={`Image ${index}`} className={`w-full mb-4 rounded-lg`} />
                                     ))}
                                 </div>
