@@ -21,17 +21,16 @@ export function Campground({ authState }) {
 
     React.useEffect(() => {
 
-        function calculateEndDate(dateString, numberOfDaysToAdd) {
-            // create a Date object from the input date string
-            const date = new Date(dateString);
-            // add the number of days to the date
-            date.setDate(date.getDate() + numberOfDaysToAdd);
+        async function calculateEndDate(dateString, numberOfDaysToAdd) {
+            const endDate = new Date(dateString);
+            endDate.setDate(endDate.getDate() + numberOfDaysToAdd);
+            console.log('end date: ' + endDate.getDate)
             // format the date as a string in mm/dd/yyyy format
-            return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+            return `${endDate.getMonth() + 1}/${endDate.getDate()}/${endDate.getFullYear()}`;
         }
 
         async function setTracker() {
-            const end_date = calculateEndDate(date, nights)
+            const end_date = await calculateEndDate(date, parseInt(nights))
             return await fetch('/api/add_tracker', {
                 method: 'POST',
                 headers: {
@@ -47,12 +46,13 @@ export function Campground({ authState }) {
                 })
             })
         }
-        if (trackerItem){
-        setTracker()
-        .then(() => setLoading(false))
-        .then(() => setTrackerSet(true))
+        if (trackerItem) {
+            setLoading(true)
+            setTracker()
+                .then(() => setLoading(false))
+                .then(() => setTrackerSet(true))
         }
-    }, [trackerItem])
+    }, [trackerItem, date])
 
     React.useEffect(() => {
         async function getCampgroundDetails(campground_id) {
@@ -182,17 +182,17 @@ export function Campground({ authState }) {
                                                     </div>
                                                     <div>
                                                         {!loading && (
-                                                            <Button size="lg" className='w-full' onClick={() => {setTrackerItem(true); setLoading(true)}}>
+                                                            <Button size="lg" className='w-full' onClick={() => setTrackerItem(true)}>
                                                                 {trackerSet ? 'Tracker Set' : 'Track'}
                                                             </Button>
                                                         )}
                                                         {loading && (
-                                                        <Button size="lg" className='w-full' onClick={() => setTrackerItem(true)}>
-                                                            <Spinner aria-label="Spinner button example" />
-                                                            <span className="pl-3">
-                                                                Setting Tracker
-                                                            </span>
-                                                        </Button>
+                                                            <Button size="lg" className='w-full' onClick={() => setTrackerItem(true)}>
+                                                                <Spinner aria-label="Spinner button example" />
+                                                                <span className="pl-3">
+                                                                    Setting Tracker
+                                                                </span>
+                                                            </Button>
                                                         )}
                                                     </div>
                                                 </div>
