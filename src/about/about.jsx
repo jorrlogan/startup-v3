@@ -6,11 +6,11 @@ export function About() {
     return (
         <div className="flex content-center">
 
-            <div if="info" className="flex justify-center items-center flex-col mb-24">
+            <div if="info" className="flex items-center flex-col mb-24">
                 <p class="text-black text-2xl mb-8 mt-12 w-9/12">
                     Dear Campers,<br></br><br></br>
 
-                    A year ago I was tasked with finding two campgrounds in Arches national park. 
+                    A year ago I was tasked with finding two campgrounds in Arches national park.
                     I was given short notice and had less than a week to book two campgrounds in one of the most popular national parks in the country.
                     I spend the following three days continually refreshing my browser to check for cancellations. I eventually lucked out and got two campgrounds.
                     <br></br><br></br>
@@ -30,8 +30,10 @@ export function About() {
                     Sincerely,
                     <br></br>
                     The Fly Fisherman
-                    </p>
-                    <img src={logan} className="w-9/12 rounded-lg"/>
+                </p>
+                <div className="w-9/12">
+                    <img src={logan} className="rounded-lg" />
+                </div>
             </div>
         </div>
     )

@@ -1616,6 +1616,14 @@ input:checked + .toggle-bg {
   width: 33.333333%;
 }
 
+.w-6\/12 {
+  width: 50%;
+}
+
+.w-3\/12 {
+  width: 25%;
+}
+
 .max-w-2xl {
   max-width: 42rem;
 }

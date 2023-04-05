@@ -39,6 +39,7 @@ async function addTracker(campground_id, device_token, campground_name, start_da
             'end_date': `${end_date}`
         })
     })
+    return await response.json()
 
 }
 

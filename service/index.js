@@ -136,7 +136,8 @@ secureApiRouter.post('/add_tracker', async (req, res) => {
         let json = await campsnatch.addTracker(campground_id, device_token, campground_name, start_date, end_date)
         res.send(json)
     } catch(error) {
-        // res.status(401).send({ msg: 'Unauthorized' });
+        console.log(error)
+        res.status(401).send({ msg: 'Unauthorized' });
     }
 })
 

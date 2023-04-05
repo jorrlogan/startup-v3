@@ -11,6 +11,40 @@ export function Campground(props) {
     const [campgroundDetails, setCampgroundDetails] = React.useState('')
     const [campgroundImages, setCampgroundImages] = React.useState([])
     const [loaded, setLoaded] = React.useState(false)
+    const [date, setDate] = React.useState(null)
+    const [nights, setNights] = React.useState(1)
+    const [trackerItem, setTrackerItem] = React.useState(false)
+
+    React.useEffect(() => {
+
+        function calculateEndDate(dateString, numberOfDaysToAdd) {
+            // create a Date object from the input date string
+            const date = new Date(dateString);
+            // add the number of days to the date
+            date.setDate(date.getDate() + numberOfDaysToAdd);
+            // format the date as a string in mm/dd/yyyy format
+            return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+        }
+
+        async function setTracker() {
+            const end_date = calculateEndDate(date, nights)
+            return await fetch('/api/add_tracker', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    'campground_id': `${id}`,
+                    'device_token': `${localStorage.getItem('userName')}`,
+                    'campground_name': `${name}`,
+                    'start_date': `${date}`,
+                    'end_date': `${end_date}`
+                })
+            })
+        }
+        setTracker()
+    }, [trackerItem])
 
     React.useEffect(() => {
         async function getCampgroundDetails(campground_id) {
@@ -54,7 +88,6 @@ export function Campground(props) {
     React.useEffect(() => {
         if (loaded) {
             const datepickerEl = document?.getElementById("datepickerId");
-            // console.log(datepickerEl);
             new Datepicker(datepickerEl, {});
         }
     }, [loaded]);
@@ -109,7 +142,8 @@ export function Campground(props) {
                                                             type="text"
                                                             className="text-gray-900 sm:text-sm border-none block w-full p-2.5 focus:ring-0 focus:ring-offset-0"
                                                             placeholder="Select date"
-                                                            onSelect={(e) => console.log(e.target.value)}
+                                                            // onSelect={(e) => console.log(e.target.value)}
+                                                            onSelect={(e) => setDate(e.target.value)}
                                                             // onClick={(e) => dobHandler(e)}
                                                             // onClick={(e) => console.log(e.target.value)}
                                                             // onChange={(e) => console.log(e)}
@@ -137,7 +171,7 @@ export function Campground(props) {
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <Button size="lg" className='w-full'>
+                                                    <Button size="lg" className='w-full' onClick={() => setTrackerItem(true)}>
                                                         Track
                                                     </Button>
                                                 </div>
