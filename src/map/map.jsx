@@ -4,6 +4,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import './map.css'
 import { Link } from "react-router-dom";
 import ReactDOMServer from "react-dom/server";
+import { Spinner } from 'flowbite-react';
 
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoiam9ycmxvZ2FuIiwiYSI6ImNsZnVqMTIydjAycTAzZ250bG1wc2xmc3cifQ.mZwH-XJARtUN7Ru4Y9N-mA';
@@ -11,6 +12,7 @@ mapboxgl.accessToken = 'pk.eyJ1Ijoiam9ycmxvZ2FuIiwiYSI6ImNsZnVqMTIydjAycTAzZ250b
 const Map = () => {
     const [map, setMap] = useState(null);
     const [data, setData] = useState(null);
+    const [loaded, setLoaded] = React.useState(false)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -54,6 +56,7 @@ const Map = () => {
           )
         .addTo(map);
       });
+      setLoaded(true)
       // Clean up
       return () => map.remove();
     }
@@ -99,10 +102,21 @@ const Map = () => {
 
     return (
         <div className="flex justify-center mt-8">
-            <div id="map" className="w-9/12 rounded-lg" style={{ height: "80vh" }}>
-
-            </div>
+        <div id="map" className="w-9/12 rounded-lg" style={{ height: "80vh" }}>a=</div>
+        <div id="infoi">
+        { !loaded && (
+        <div className='flex justify-center'>
+            <Spinner
+                color="info"
+                aria-label="Info spinner example"
+                size="xl"
+                className='mt-8'
+            />
         </div>
+        )}
+        </div>
+        </div>
+       
     )
 };
 
