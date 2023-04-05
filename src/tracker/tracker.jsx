@@ -1,11 +1,12 @@
 import { TableRow } from 'flowbite-react/lib/esm/components/Table/TableRow'
 import { async } from 'q'
 import React from 'react'
+import { Spinner } from 'flowbite-react';
 
 export function Tracker() {
     const [tableHead, setTableHead] = React.useState(null)
     const [trackerRows, setTrackerRows] = React.useState(null)
-
+    const [loaded, setLoaded] = React.useState(false)
 
     React.useEffect(() => {
         const email = localStorage.getItem('userName')
@@ -123,6 +124,7 @@ export function Tracker() {
                 </tr>
             )
         }
+        setLoaded(true)
         setTrackerRows(rows)
     }
 
@@ -130,6 +132,16 @@ export function Tracker() {
         <div className="">
             <div className="m-4 flex flex-col justify-center items-center">
                 <div className="w-9/12">
+                    { !loaded && (
+                    <div className='flex justify-center'>
+                        <Spinner
+                            color="info"
+                            aria-label="Info spinner example"
+                            size="xl"
+                            className='mt-8'
+                        />
+                    </div>
+                    )}
                     <div className="relative shadow-md sm:rounded-lg rounded-lg bg-white overflow-x-auto">
                         <table className="text-sm text-left text-gray-500 dark:text-gray-400 w-full">
                             <thead id="tracker-table-head"
