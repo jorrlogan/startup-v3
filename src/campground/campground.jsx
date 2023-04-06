@@ -113,9 +113,9 @@ export function Campground({ authState }) {
                 </div>
             )}
             {loaded && (
-                <div className="h-5/6 flex flex-row justify-center items-center flex-wrap">
-                    <div className="md:w-9/12 h-5/6">
-                        <div className="">
+                <div className="h-5/6 w-screen flex flex-row justify-center items-center flex-wrap">
+                    <div className="w-9/12 h-5/6 flex justify-center">
+                        <div className="w-full justify-center ">
                             <div className=" flex justify-center items-center content-center flex-row flex-wrap">
                                 <div className="bg-white p-4 grid grid-cols-1">
                                     <div className='flex justify-between items-center border-b pb-4 border-gray-500'>
