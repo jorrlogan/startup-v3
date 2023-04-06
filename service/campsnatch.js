@@ -1,27 +1,12 @@
+const db = require('./db/db')
+
 async function getCampgrounds() {
-    let response = await fetch('https://tt7sxvlds5.execute-api.us-west-2.amazonaws.com/dev/search', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ 'search': 'all' })
-    })
-    return await response.json()
+    let response = await db.getCampgrounds()
+    return response
 }
 
 async function getTrackers(device_token){
-    let response = await fetch('https://tt7sxvlds5.execute-api.us-west-2.amazonaws.com/dev/gettrackers', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            'device_token': `${device_token}`
-        })
-    })
-    return await response.json()
+    return await db.getTrackers(device_token)
 }
 
 async function addTracker(campground_id, device_token, campground_name, start_date, end_date){

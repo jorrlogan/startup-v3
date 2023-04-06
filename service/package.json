@@ -12,6 +12,7 @@
     "tailwindcss": "^3.2.7"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.306.0",
     "aws-sdk": "^2.1342.0",
     "bcrypt": "^5.1.0",
     "cookie-parser": "^1.4.6",

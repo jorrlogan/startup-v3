@@ -41,7 +41,7 @@ export function Search() {
     function parseCampgrounds(campgrounds) {
         let campgroundRows = []
         for (const camp of campgrounds) {
-            campgroundRows.push({ id: camp.campgroundId, name: camp.campsiteName })
+            campgroundRows.push({ id: camp.campgroundId, name: camp.campgroundName })
         }
         return campgroundRows
     }
