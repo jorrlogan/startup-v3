@@ -6,6 +6,7 @@ import Datepicker from "flowbite-datepicker/Datepicker";
 import { Button, TextInput } from 'flowbite-react';
 import { Spinner } from 'flowbite-react';
 import { AuthState } from '../login/authState';
+import { TrackEvent, TrackerNotifier } from '../tracker/tracker_notifier';
 
 export function Campground({ authState }) {
     const { id, name } = useParams()
@@ -51,6 +52,7 @@ export function Campground({ authState }) {
             setTracker()
                 .then(() => setLoading(false))
                 .then(() => setTrackerSet(true))
+            TrackerNotifier.broadcastEvent(localStorage.getItem('userName'), TrackEvent.TrackerSet, {msg: `set tracker for ${name}`})
         }
     }, [trackerItem, date])
 

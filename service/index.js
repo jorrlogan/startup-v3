@@ -77,15 +77,15 @@ apiRouter.delete('/auth/logout', (_req, res) => {
 apiRouter.get('/user/:email', async (req, res) => {
     const user = await DB.getUser(req.params.email);
     if (user) {
-      const token = req?.cookies.token;
-      res.send({ email: user.email, authenticated: token === user.token });
-      return;
+        const token = req?.cookies.token;
+        res.send({ email: user.email, authenticated: token === user.token });
+        return;
     }
     res.status(404).send({ msg: 'Unknown' });
-  });
+});
 
 apiRouter.get('/unsubscribe/:email', async (req, res) => {
-    
+
 })
 
 /**
@@ -143,10 +143,10 @@ secureApiRouter.post('/add_tracker', async (req, res) => {
         const device_token = req.body.device_token
         const campground_name = req.body.campground_name
         const start_date = req.body.start_date
-        const end_date  = req.body.end_date
+        const end_date = req.body.end_date
         let json = await campsnatch.addTracker(campground_id, device_token, campground_name, start_date, end_date)
         res.send(json)
-    } catch(error) {
+    } catch (error) {
         console.log(error)
         res.status(401).send({ msg: 'Unauthorized' });
     }
@@ -159,10 +159,10 @@ secureApiRouter.post('/remove_tracker', async (req, res) => {
         const device_token = req.body.device_token
         const campground_name = req.body.campground_name
         const start_date = req.body.start_date
-        const end_date  = req.body.end_date
+        const end_date = req.body.end_date
         let json = await campsnatch.removeTracker(campground_id, device_token, campground_name, start_date, end_date)
         res.send(json)
-    } catch(error) {
+    } catch (error) {
         // res.status(401).send({ msg: 'Unauthorized' });
     }
 })
