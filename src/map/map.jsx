@@ -57,25 +57,12 @@ const Map = () => {
                 .setPopup(
                     new mapboxgl.Popup({ offset: 25 }) // add popups
                     .setHTML(
-                        `<h3><a href=${`${'http://localhost:6002/campground/' + feature.properties.id + '/' + encodeURIComponent(feature.properties.name)}`}>${feature.properties.name}</a></h3>`  
+                        `<h3><a href=${`${`http://${window.location.hostname}:${window.location.port}/campground/` + feature.properties.id + '/' + encodeURIComponent(feature.properties.name)}`}>${feature.properties.name}</a></h3>`  
                         // `<h3>${point.name}</h3>`
                     )
                 )
                 .addTo(map);
             }
-
-            // data.forEach((point) => {
-            //     new mapboxgl.Marker()
-            //     .setLngLat([point.longitude, point.latitude])
-            //     .setPopup(
-            //         new mapboxgl.Popup({ offset: 25 }) // add popups
-            //         .setHTML(
-            //             `<h3><a href=${`${'http://localhost:6002/campground/' + point.id + '/' + encodeURIComponent(point.name)}`}>${point.name}</a></h3>`  
-            //             // `<h3>${point.name}</h3>`
-            //         )
-            //     )
-            //     .addTo(map);
-            // });
             setLoaded(true)
             // Clean up
             return () => map.remove();
