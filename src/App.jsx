@@ -10,6 +10,7 @@ import { Tracker } from './tracker/tracker'
 import { Login } from './login/login'
 import { AuthState } from './login/authState';
 import logo from './assets/tree.png'
+import beta from './assets/beta.png'
 import { useNavigate } from 'react-router-dom';
 import { Campground } from './campground/campground';
 
@@ -55,10 +56,11 @@ function App() {
     <div className='w-screenflex justify-center flex-col'>
 
       <nav className="bg-white dark:bg-gray-900 fixed sticky top-0 pt-4 pb-4">
-        <div className="lg:w-9/12 flex flex-wrap items-center justify-between mx-auto pt-4 pb-4">
-          <NavLink to="/search" className="flex items-center">
-            <img src={logo} className="h-8 mr-3" alt="Campsnatch Logo"></img>
-            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Campsnatch</span>
+        <div className="lg:w-9/12 flex flex-wrap items-end justify-between mx-auto pt-4 pb-4">
+          <NavLink to="/search" className="flex items-baseline">
+            <img src={logo} className="self-center h-6 mr-3" alt="Campsnatch Logo"></img>
+            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white mr-4">Campsnatch</span>
+            {/* <img src={beta} className="self-center h-6 mr-3" alt="Campsnatch Logo"></img> */}
           </NavLink>
           <div className="flex md:order-2">
             {authState === AuthState.Unauthenticated && (

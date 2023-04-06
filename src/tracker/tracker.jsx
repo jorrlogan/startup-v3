@@ -131,7 +131,7 @@ export function Tracker() {
 
     return (
         <div className="">
-            <div className="m-4 flex flex-col justify-center items-center">
+            <div className="m-t flex flex-col justify-center items-center">
                 <div className="w-9/12">
                     {!loaded && (
                         <div className='flex justify-center'>
