@@ -14,7 +14,7 @@ export function About() {
                     I was given short notice and had less than a week to book two campgrounds in one of the most popular national parks in the country.
                     I spend the following three days continually refreshing my browser to check for cancellations. I eventually lucked out and got two campgrounds.
                     <br></br><br></br>
-                    As I reflected on my experience, I considered investigating if there was a bot to do this for me. I discovered an awesome website called <a>Campnab</a>.
+                    As I reflected on my experience, I considered investigating if there was a bot to do this for me. I discovered an awesome website called <a href='https://campnab.com/'>Campnab</a>.
                     I came to the realization that there must be some apis out there to allow for this website to exist. After a few hours of google searches, I discovered the
                     recreation.gov api. It allows developers to consume all sorts of cool data related to recreation areas in the United States. I would seriously recommend it to
                     any who are interested.

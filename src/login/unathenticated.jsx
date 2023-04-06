@@ -3,7 +3,6 @@ import { useState } from 'react';
 export function Unauthenticated(props) {
   const [userName, setUserName] = useState(props.userName);
   const [password, setPassword] = useState('');
-  const [isLogin, setIsLogin] = useState(true)
   const [displayError, setDisplayError] = useState(null);
 
   async function loginUser() {
@@ -38,10 +37,7 @@ export function Unauthenticated(props) {
       <div className="flex justify-start items-center content-center flex-col mt-24">
         <div
           className="xl:w-3/12 lg:w-4/12 md:w-6/12 w-full h-3/6 flex justify-center content-center items-center flex-wrap flex-col p-8 rounded-lg bg-opacity-8 ">
-          {/* {isLogin && (<h1 className="text-center md:text-4xl text-4xl font-bold mb-8 ">Login</h1>)}
-          {!isLogin && (<h1 className="text-center md:text-4xl text-4xl font-bold mb-8 ">Sign Up</h1>)} */}
           <h1 className="text-center md:text-4xl text-4xl font-bold mb-8 ">Campsnatch</h1>
-          {/* <p className="md:text-7xl text-5xl font-black mb-8 text-white">Campsnatch</p> */}
           <div className="w-full">
             <div className="mb-3">
               <label for="email" className="block mb-2 text-sm font-medium text-black dark:text-white">Email
@@ -70,8 +66,6 @@ export function Unauthenticated(props) {
           </div>
         </div>
       </div>
-
-      {/* <MessageDialog message={displayError} onHide={() => setDisplayError(null)} /> */}
     </>
   );
 }

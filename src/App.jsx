@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { NavLink, Route, Routes } from 'react-router-dom';
 import './App.css';
 import './tailwinds.css'
@@ -10,6 +10,7 @@ import { Tracker } from './tracker/tracker'
 import { Login } from './login/login'
 import { AuthState } from './login/authState';
 import logo from './assets/tree.png'
+import beta from './assets/beta.png'
 import { Campground } from './campground/campground';
 
 import mapboxgl from 'mapbox-gl';
@@ -48,6 +49,12 @@ function App() {
     .then(() => setAuthState(AuthState.Unauthenticated))
   }
 
+  // function logout() {
+  //   fetch(`/api/auth/logout`, {
+  //     method: 'delete',
+  //   }).then(() => props.onLogout());
+  // }
+
 
   return (
     <div className='w-screenflex justify-center flex-col'>
@@ -57,7 +64,7 @@ function App() {
           <NavLink to="/search" className="flex items-baseline">
             <img src={logo} className="self-center h-6 mr-3" alt="Campsnatch Logo"></img>
             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white mr-4">Campsnatch</span>
-            {/* <img src={beta} className="self-center h-6 mr-3" alt="Campsnatch Logo"></img> */}
+            <img src={beta} className="self-center h-6 mr-3" alt="Campsnatch Logo"></img>
           </NavLink>
           <div className="flex md:order-2">
             {authState === AuthState.Unauthenticated && (

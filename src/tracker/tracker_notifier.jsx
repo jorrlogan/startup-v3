@@ -19,17 +19,17 @@ class TrackerEventNotifier {
         // When dev debugging we need to talk to the service and not the React debugger
         let port = window.location.port;
         if (process.env.NODE_ENV !== 'production') {
-            port = 6001;
+            port = 6000;
         }
 
         const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
         this.socket = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
         this.socket.onopen = (event) => {
             console.log('open')
-            this.receiveEvent(new EventMessage('Simon', TrackEvent.System, { msg: 'Tracker stream: connected ✅' }));
+            this.receiveEvent(new EventMessage('Campsnatch', TrackEvent.System, { msg: 'Tracker stream: connected ✅' }));
         };
         this.socket.onclose = (event) => {
-            this.receiveEvent(new EventMessage('Simon', TrackEvent.System, { msg: 'Tracker stream: disconnected ❌' }));
+            this.receiveEvent(new EventMessage('Campsnatch', TrackEvent.System, { msg: 'Tracker stream: disconnected ❌' }));
         };
         this.socket.onmessage = async (msg) => {
             try {

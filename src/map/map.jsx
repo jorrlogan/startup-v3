@@ -5,9 +5,10 @@ import './map.css'
 import { Spinner } from 'flowbite-react';
 
 
-mapboxgl.accessToken = 'pk.eyJ1Ijoiam9ycmxvZ2FuIiwiYSI6ImNsZnVqMTIydjAycTAzZ250bG1wc2xmc3cifQ.mZwH-XJARtUN7Ru4Y9N-mA';
-
 const Map = () => {
+
+    mapboxgl.accessToken = 'pk.eyJ1Ijoiam9ycmxvZ2FuIiwiYSI6ImNsZnVqMTIydjAycTAzZ250bG1wc2xmc3cifQ.mZwH-XJARtUN7Ru4Y9N-mA';
+
     const [map, setMap] = useState(null);
     const [data, setData] = useState(null);
     const [loaded, setLoaded] = React.useState(false)
@@ -22,7 +23,7 @@ const Map = () => {
         if (data === null){
             fetchData();
         }
-    }, []);
+    }, [data]);
 
     useEffect(() => {
         console.log(data)
@@ -126,48 +127,3 @@ const Map = () => {
 };
 
 export default Map;
-
-
-
-
-
-// import React, { useEffect, useRef, useState } from "react";
-// import mapboxgl from "mapbox-gl";
-// import "mapbox-gl/dist/mapbox-gl.css";
-
-// mapboxgl.accessToken = "pk.eyJ1Ijoiam9ycmxvZ2FuIiwiYSI6ImNsZnVqMTIydjAycTAzZ250bG1wc2xmc3cifQ.mZwH-XJARtUN7Ru4Y9N-mA";
-
-// const Map = () => {
-//     const [lng, setLng] = useState(-73.985664);
-//     const [lat, setLat] = useState(40.748514);
-//     const [zoom, setZoom] = useState(12);
-//     const mapRef = useRef(null);
-  
-//     useEffect(() => {
-//       const map = new mapboxgl.Map({
-//         container: mapRef.current,
-//         style: "mapbox://styles/mapbox/streets-v11",
-//         center: [lng, lat],
-//         zoom: zoom,
-//       });
-  
-//       // Define the coordinates for your points
-//       const points = [
-//         [-73.9817, 40.7634],
-//         [-73.9858, 40.7464],
-//         [-73.9735, 40.7648],
-//       ];
-  
-//       // Add the points to the map
-//       points.forEach((point) => {
-//         new mapboxgl.Marker().setLngLat(point).addTo(map);
-//       });
-  
-//       // Clean up
-//       return () => map.remove();
-//     }, []);
-  
-//     return <div ref={mapRef} style={{ width: "100%", height: "500px" }} />;
-//   };
-  
-//   export default Map;

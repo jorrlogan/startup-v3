@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import './campground.css'
 import 'flowbite';
 import Datepicker from "flowbite-datepicker/Datepicker";
-import { Button, TextInput } from 'flowbite-react';
+import { Button } from 'flowbite-react';
 import { Spinner } from 'flowbite-react';
 import { AuthState } from '../login/authState';
 import { TrackEvent, TrackerNotifier } from '../tracker/tracker_notifier';
@@ -130,7 +130,7 @@ export function Campground({ authState }) {
                                     <div id="images"
                                         className="gap-4 columns-3 rounded-lg mt-4">
                                         {campgroundImages !== undefined && campgroundImages.slice(0, 6).map((image, index) => (
-                                            <img key={index} src={image} alt={`Image ${index}`} className={`w-full mb-4 rounded-lg`} />
+                                            <img key={index} src={image} alt={`${index}`} className={`w-full mb-4 rounded-lg`} />
                                         ))}
                                     </div>
                                     <div>
