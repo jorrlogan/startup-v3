@@ -1,8 +1,5 @@
 import { useState } from 'react';
 
-import { Button } from 'flowbite-react';
-// import { MessageDialog } from './messageDialog';
-
 export function Unauthenticated(props) {
   const [userName, setUserName] = useState(props.userName);
   const [password, setPassword] = useState('');

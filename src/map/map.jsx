@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import './map.css'
-import { Link } from "react-router-dom";
-import ReactDOMServer from "react-dom/server";
 import { Spinner } from 'flowbite-react';
 
 

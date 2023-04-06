@@ -10,8 +10,6 @@ import { Tracker } from './tracker/tracker'
 import { Login } from './login/login'
 import { AuthState } from './login/authState';
 import logo from './assets/tree.png'
-import beta from './assets/beta.png'
-import { useNavigate } from 'react-router-dom';
 import { Campground } from './campground/campground';
 
 import mapboxgl from 'mapbox-gl';
@@ -21,7 +19,6 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 mapboxgl.accessToken = 'pk.eyJ1Ijoiam9ycmxvZ2FuIiwiYSI6ImNsZnVqMTIydjAycTAzZ250bG1wc2xmc3cifQ.mZwH-XJARtUN7Ru4Y9N-mA';
 
 function App() {
-  const navigate = useNavigate();
   const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
 
   // Asynchronously determine if the user is authenticated by calling the service

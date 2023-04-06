@@ -1,12 +1,9 @@
 // import { response } from "express";
 import React from "react";
-import { useNavigate } from 'react-router-dom';
-import { Campground } from "../campground/campground";
 import { Link } from "react-router-dom";
 import '../tailwinds.css'
 
 export function Search() {
-    const navigate = useNavigate();
     const [campgrounds, setCampgrounds] = React.useState([])
     const [filteredCampgrounds, setFilteredCampgrounds] = React.useState([])
     const [searchString, setSearchString] = React.useState('')

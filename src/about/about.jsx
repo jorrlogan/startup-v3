@@ -1,6 +1,6 @@
 import React from "react";
 import './about.css'
-import logan from '../assets/logan_fish.png'
+// import logan from '../assets/logan_fish_2.png'
 
 export function About() {
     return (
@@ -31,9 +31,9 @@ export function About() {
                     <br></br>
                     The Fly Fisherman
                 </p>
-                <div className="w-9/12">
+                {/* <div className="w-9/12">
                     <img src={logan} className="rounded-lg" />
-                </div>
+                </div> */}
             </div>
         </div>
     )

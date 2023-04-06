@@ -54,7 +54,7 @@ export function Campground({ authState }) {
                 .then(() => setTrackerSet(true))
             TrackerNotifier.broadcastEvent(localStorage.getItem('userName'), TrackEvent.TrackerSet, {msg: `set tracker for ${name}`})
         }
-    }, [trackerItem, date])
+    }, [trackerItem, date, id, name, nights])
 
     React.useEffect(() => {
         async function getCampgroundDetails(campground_id) {
@@ -93,14 +93,14 @@ export function Campground({ authState }) {
                 .then(() => setLoaded(true))
                 .catch((e) => console.log(e))
         }
-    }, [])
+    }, [id])
 
     React.useEffect(() => {
         if (loaded && authState === AuthState.Authenticated) {
             const datepickerEl = document?.getElementById("datepickerId");
             new Datepicker(datepickerEl, {});
         }
-    }, [loaded]);
+    }, [loaded, authState]);
 
     return (
         <main>
