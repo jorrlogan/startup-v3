@@ -68,8 +68,13 @@ apiRouter.post('/auth/login', async (req, res) => {
 
 apiRouter.get('/campgrounds', async (req, res) => {
     let json = await campsnatch.getCampgrounds()
-    res.setHeader('Cache-Control', 'max-age=36000');
+    res.setHeader('Cache-Control', 'max-age=604800');
     res.send(json)
+})
+
+apiRouter.post('/campground_images', async (req, res) => {
+    let images = await campsnatch.getCampgroundImages(req.body.campground_id)
+    res.send({ images: images })
 })
 
 /**
@@ -131,10 +136,10 @@ function setAuthCookie(res, authToken) {
 //     res.send(json)
 // })
 
-apiRouter.post('/campground_images', async (req, res) => {
-    let images = await campsnatch.getCampgroundImages(req.body.campground_id)
-    res.send({ images: images })
-})
+// apiRouter.post('/campground_images', async (req, res) => {
+//     let images = await campsnatch.getCampgroundImages(req.body.campground_id)
+//     res.send({ images: images })
+// })
 
 secureApiRouter.post('/trackers', async (req, res) => {
     console.log('getting trackers')
