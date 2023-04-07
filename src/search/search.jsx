@@ -1,14 +1,17 @@
 // import { response } from "express";
 import React from "react";
 import { Link } from "react-router-dom";
+import { Spinner } from 'flowbite-react';
 import '../tailwinds.css'
 
 export function Search() {
     const [campgrounds, setCampgrounds] = React.useState([])
     const [filteredCampgrounds, setFilteredCampgrounds] = React.useState([])
     const [searchString, setSearchString] = React.useState('')
+    const [loaded, setLoaded] = React.useState(false)
 
     React.useEffect(() => {
+        setLoaded(false)
         const params = {
             method: 'GET',
             headers: {
@@ -20,6 +23,7 @@ export function Search() {
         fetch('/api/campgrounds', params)
             .then((response) => response.json())
             .then((data) => setCampgrounds(parseCampgrounds(data.campgroundList)))
+            .then(() => setLoaded(true))
             .catch((error) => console.log(error))
     }, []);
 
@@ -58,6 +62,21 @@ export function Search() {
                     <input type="text" id="default-search" className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Campgrounds" required onChange={(search) => setSearchString(search.target.value)}></input>
                     <button type="submit" className="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
                 </div>
+                {!loaded && (
+                        <div className="flex justify-center">
+                            <div className="flex justify-center flex-col">
+                                <div className="flex justify-center">
+                            <Spinner
+                                color="info"
+                                aria-label="Info spinner example"
+                                size="xl"
+                                className='mt-8 self-center'
+                            />
+                            </div>
+                            <h3 className="pt-4">Fetching Campgrounds...</h3>
+                            </div>
+                        </div>
+                    )}
             </form>
             <div className="w-5/12">
                 <ul>
