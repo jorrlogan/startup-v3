@@ -65,6 +65,13 @@ apiRouter.post('/auth/login', async (req, res) => {
     res.status(401).send({ msg: 'User does not exist' });
 });
 
+
+apiRouter.get('/campgrounds', async (req, res) => {
+    let json = await campsnatch.getCampgrounds()
+    res.setHeader('Cache-Control', 'max-age=36000');
+    res.send(json)
+})
+
 /**
  * DeleteAuth token if stored in cookie
  */
@@ -118,11 +125,11 @@ function setAuthCookie(res, authToken) {
 }
 
 
-secureApiRouter.get('/campgrounds', async (req, res) => {
-    let json = await campsnatch.getCampgrounds()
-    res.setHeader('Cache-Control', 'max-age=36000');
-    res.send(json)
-})
+// apiRouter.get('/campgrounds', async (req, res) => {
+//     let json = await campsnatch.getCampgrounds()
+//     res.setHeader('Cache-Control', 'max-age=36000');
+//     res.send(json)
+// })
 
 apiRouter.post('/campground_images', async (req, res) => {
     let images = await campsnatch.getCampgroundImages(req.body.campground_id)

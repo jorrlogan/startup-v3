@@ -1,12 +1,21 @@
-const db = require('./db/db')
 
 async function getCampgrounds() {
-    let response = await db.getCampgrounds()
-    return response
+    let response = await fetch('https://v6524xtm51.execute-api.us-east-1.amazonaws.com/dev/campgrounds')
+    return await response.json()
 }
 
 async function getTrackers(device_token){
-    return await db.getTrackers(device_token)
+    let response = await fetch('https://v6524xtm51.execute-api.us-east-1.amazonaws.com/dev/trackers', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            'device_token': `${device_token}`
+        })
+    })
+    return await response.json()
 }
 
 async function addTracker(campground_id, device_token, campground_name, start_date, end_date){
@@ -25,7 +34,6 @@ async function addTracker(campground_id, device_token, campground_name, start_da
         })
     })
     return await response.json()
-
 }
 
 async function removeTracker(campground_id, device_token, campground_name, start_date, end_date){
